@@ -3,6 +3,9 @@ import defaultSettings from "@/settings";
 export const setTokenSession = (token) => {
   window.sessionStorage.setItem("token", token);
 };
+export const resetTokenSession = () => {
+  window.sessionStorage.removeItem("token");
+};
 
 export const getTokenSession = () => {
   return window.sessionStorage.getItem("token");
@@ -11,6 +14,9 @@ export const getTokenSession = () => {
 export const setAvatarSession = (avatar) => {
   window.sessionStorage.setItem("avatar", avatar);
 };
+export const resetAvatarSession = () => {
+  window.sessionStorage.removeItem("avatar");
+};
 
 export const getAvatarSession = () => {
   return window.sessionStorage.getItem("avatar");
@@ -18,6 +24,9 @@ export const getAvatarSession = () => {
 
 export const setProjectNameSession = (projectName) => {
   window.sessionStorage.setItem("projectName", projectName);
+};
+export const resetProjectNameSession = () => {
+  window.sessionStorage.removeItem("projectName");
 };
 
 export const getProjectNameSession = () => {

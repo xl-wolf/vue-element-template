@@ -6,3 +6,10 @@ export const loginApi = (params) => {
     params,
   });
 };
+export const logoutApi = (params) => {
+  return request({
+    url: "user/logout",
+    method: "post",
+    params,
+  });
+};

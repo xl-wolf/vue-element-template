@@ -1,8 +1,11 @@
-import { loginApi } from "@/apis/user";
+import { loginApi, logoutApi } from "@/apis/user";
 import {
   setTokenSession,
   setAvatarSession,
   setProjectNameSession,
+  resetTokenSession,
+  resetAvatarSession,
+  resetProjectNameSession,
 } from "@/utils/index";
 const getDefaultState = () => {
   return {
@@ -18,11 +21,20 @@ const mutations = {
   SET_TOKEN: (state, token) => {
     state.token = token;
   },
+  RESET_TOKEN: (state) => {
+    state.token = null;
+  },
   SET_PROJECT_NAME: (state, projectName) => {
     state.projectName = projectName;
   },
+  RESET_PROJECT_NAME: (state) => {
+    state.projectName = null;
+  },
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar;
+  },
+  RESET_AVATAR: (state) => {
+    state.avatar = null;
   },
 };
 
@@ -44,6 +56,26 @@ const actions = {
 
           commit("SET_AVATAR", data.avatar);
           setAvatarSession(data.avatar);
+
+          resolve();
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  },
+  logout({ commit }, token) {
+    return new Promise((resolve, reject) => {
+      logoutApi({ token })
+        .then(() => {
+          commit("RESET_TOKEN");
+          resetTokenSession();
+
+          commit("RESET_PROJECT_NAME");
+          resetProjectNameSession();
+
+          commit("RESET_AVATAR");
+          resetAvatarSession();
 
           resolve();
         })
