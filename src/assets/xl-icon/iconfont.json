@@ -1,0 +1,37 @@
+{
+  "id": "1842101",
+  "name": "vue-element-template",
+  "font_family": "iconfont",
+  "css_prefix_text": "xl-icon-",
+  "description": "个人vue+element全栈项目（前端）",
+  "glyphs": [
+    {
+      "icon_id": "851473",
+      "name": "password",
+      "font_class": "password",
+      "unicode": "e6a9",
+      "unicode_decimal": 59049
+    },
+    {
+      "icon_id": "12370109",
+      "name": "eyes-care",
+      "font_class": "protect-eyes",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "13260059",
+      "name": "user",
+      "font_class": "user",
+      "unicode": "e673",
+      "unicode_decimal": 58995
+    },
+    {
+      "icon_id": "1472406",
+      "name": "eye-close",
+      "font_class": "eye-close",
+      "unicode": "e6b8",
+      "unicode_decimal": 59064
+    }
+  ]
+}
