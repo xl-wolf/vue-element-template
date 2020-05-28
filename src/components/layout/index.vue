@@ -7,7 +7,9 @@
       <el-header>
         <headerNav />
       </el-header>
-      <el-main>Main</el-main>
+      <el-main>
+        <appMain />
+      </el-main>
     </el-container>
   </el-container>
 </template>
@@ -15,9 +17,10 @@
 <script>
 import sidebar from './components/sidebar'
 import headerNav from './components/headerNav'
+import appMain from './components/appMain'
 import { mapGetters } from 'vuex'
 export default {
-  components: { sidebar, headerNav },
+  components: { sidebar, headerNav, appMain },
   computed: { ...mapGetters(['menuStatus']) }
 }
 </script>

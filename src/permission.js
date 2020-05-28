@@ -12,8 +12,9 @@ router.beforeEach(async (to, from, next) => {
   NProgress.start();
   // set page title
   document.title = getPageTitle(to.meta.title);
-  // const { redirect } = store.getters;
+  // const {redirect,} = store.getters;
   const token = getTokenSession();
+  store.dispatch("app/activedMenuItem",to.name)
   if (token) {
     NProgress.done();
     if (to.name === "login") {

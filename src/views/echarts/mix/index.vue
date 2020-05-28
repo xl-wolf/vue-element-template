@@ -1,0 +1,65 @@
+<template>
+  <div class="app-container">
+    <div id="echarts-mixChart--container"></div>
+  </div>
+</template>
+
+<script>
+// 引入基本模板
+import Echarts from 'echarts/lib/echarts'
+// 引入柱状图，线图组件
+import 'echarts/lib/chart/line'
+import 'echarts/lib/chart/bar'
+// 引入提示框和title组件，图例等组件
+import 'echarts/lib/component/tooltip'
+import 'echarts/lib/component/dataZoom'
+import 'echarts/lib/component/title'
+import 'echarts/lib/component/legend'
+import 'echarts/lib/component/legendScroll' //图例翻译滚动
+// 引入柱状图基本配置文件
+import chartOpts from './chartOpts'
+// 引入echarts主题配置文件
+import { theme_01, theme_02 } from './themes'
+export default {
+  name: 'mixChart',
+  created() {
+    // 注册主题
+    this.registerTheme()
+  },
+  mounted() {
+    this.initMixEchart()
+  },
+  methods: {
+    // 注册主题
+    registerTheme() {
+      Echarts.registerTheme('theme_01', theme_01)
+      Echarts.registerTheme('theme_02', theme_02)
+    },
+
+    initMixEchart() {
+      // 获取echarts容器与其引用
+      const mixEchartsContainer = document.getElementById('echarts-mixChart--container')
+      const mixEchartsRef = Echarts.init(mixEchartsContainer, 'theme_02')
+      this.generateChartData().then(res => {
+        console.log(res)
+        const chartOpts = res
+        // 使用指定的配置项和数据显示图表
+        mixEchartsRef.setOption(chartOpts)
+      })
+      window.onresize = mixEchartsRef.resize
+    },
+    // 生成随机数据-->后期的ajax请求
+    generateChartData() {
+      return new Promise((resolve, reject) => {
+        resolve(chartOpts)
+      })
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+#echarts-mixChart--container {
+  height: 600px;
+}
+</style>

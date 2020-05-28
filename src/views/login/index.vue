@@ -45,7 +45,7 @@
         <span class="show-pwd" @click="showPwd">
           <i
             class="iconfont"
-            :class="passwordType === 'password' ? 'xl-icon-eye-close' : 'xl-icon-protect-eyes'"
+            :class="passwordType === 'password' ? 'xl-icon-eye-close' : 'xl-icon-open-eyes'"
           />
         </span>
       </el-form-item>
@@ -122,7 +122,7 @@ export default {
             .dispatch('user/login', this.loginForm)
             .then(() => {
               // console.log('this.redirect',this.redirect)
-              this.$router.push({ name: this.redirect || 'layout' })
+              this.$router.push({ name: this.redirect || 'home' })
               this.loading = false
             })
             .catch(() => {

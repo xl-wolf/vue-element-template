@@ -6,18 +6,74 @@
   "description": "个人vue+element全栈项目（前端）",
   "glyphs": [
     {
+      "icon_id": "880323",
+      "name": "home",
+      "font_class": "home",
+      "unicode": "e6b0",
+      "unicode_decimal": 59056
+    },
+    {
+      "icon_id": "705650",
+      "name": "3d",
+      "font_class": "3d",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "762264",
+      "name": "Swipe-Right",
+      "font_class": "swiperight",
+      "unicode": "e63a",
+      "unicode_decimal": 58938
+    },
+    {
+      "icon_id": "1224929",
+      "name": "open-eyes",
+      "font_class": "open-eyes",
+      "unicode": "e6af",
+      "unicode_decimal": 59055
+    },
+    {
+      "icon_id": "1308539",
+      "name": "751编辑器_百度地图",
+      "font_class": "751bianjiqi_baiduditu",
+      "unicode": "e652",
+      "unicode_decimal": 58962
+    },
+    {
+      "icon_id": "1368661",
+      "name": "3d",
+      "font_class": "d",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "1621435",
+      "name": "VR",
+      "font_class": "VR",
+      "unicode": "e620",
+      "unicode_decimal": 58912
+    },
+    {
+      "icon_id": "6858480",
+      "name": "3D",
+      "font_class": "D",
+      "unicode": "e6cd",
+      "unicode_decimal": 59085
+    },
+    {
+      "icon_id": "8519523",
+      "name": "高德地图",
+      "font_class": "gaodeditu",
+      "unicode": "e6fe",
+      "unicode_decimal": 59134
+    },
+    {
       "icon_id": "851473",
       "name": "password",
       "font_class": "password",
       "unicode": "e6a9",
       "unicode_decimal": 59049
-    },
-    {
-      "icon_id": "12370109",
-      "name": "eyes-care",
-      "font_class": "protect-eyes",
-      "unicode": "e609",
-      "unicode_decimal": 58889
     },
     {
       "icon_id": "13260059",
