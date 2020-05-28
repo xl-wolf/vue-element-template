@@ -171,7 +171,7 @@ export default {
               document.getElementById(this.dataId).addEventListener('click', () => {
                 console.log('this.dataId', this.dataId, this)
               })
-            }, 0)
+            }, 500)
           })
           infoWinRef.open(vm.Amap, position)
         })

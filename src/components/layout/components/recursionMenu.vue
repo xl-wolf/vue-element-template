@@ -10,7 +10,10 @@
         <template slot="title">
           <i :class="'mr12 iconfont '+menuItem.meta.icon"></i>
           <!-- slot title 要加上，否则菜单收起时悬停没有tooltip出现 -->
-          <span slot="title">{{menuItem.meta.title}}</span>
+          <span
+            :class="{'hideTitle':menuStatus&&menuItem.level===1}"
+            slot="title"
+          >{{menuItem.meta.title}}</span>
         </template>
         <recursionMenu :menuTree="menuItem.children" />
       </el-submenu>
@@ -66,6 +69,9 @@ export default {
     .hideTitle {
       visibility: hidden;
     }
+  }
+  .el-submenu__icon-arrow.el-icon-arrow-right {
+    visibility: hidden;
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="p20">
+  <div class="p20" id="swiper-demo">
     <swiper
       :list="list"
       :item-width="itemWidth"
@@ -45,7 +45,7 @@ export default {
 </script>
 
 <style>
-.p20 {
+#swiper-demo.p20 {
   padding: 20px;
 }
 </style>

@@ -67,7 +67,6 @@
 
 <script>
 import { validUsername } from '@/utils/validate'
-import { mapGetters } from 'vuex'
 
 export default {
   name: 'Login',
@@ -99,9 +98,7 @@ export default {
       passwordType: 'password'
     }
   },
-  computed: {
-    ...mapGetters(['redirect'])
-  },
+  computed: {},
   watch: {},
   methods: {
     showPwd() {
@@ -121,8 +118,7 @@ export default {
           this.$store
             .dispatch('user/login', this.loginForm)
             .then(() => {
-              // console.log('this.redirect',this.redirect)
-              this.$router.push({ name: this.redirect || 'home' })
+              this.$router.push({ name: 'home' })
               this.loading = false
             })
             .catch(() => {

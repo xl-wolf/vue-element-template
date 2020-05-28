@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import routeArr from "./src";
-console.log(routeArr);
+import routeArray from "./src";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -10,10 +10,7 @@ const routes = [
     redirect: "/login",
     hidden: true,
   },
-
-  ...routeArr,
-
-  
+  ...routeArray,
   // 404 page must be placed at the end !!!
   {
     path: "*",
