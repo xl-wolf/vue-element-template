@@ -48,8 +48,9 @@ export default {
           menuTree.push(...menu.children)
         }
       })
-      console.log(22, menuTree)
-      return menuTree
+      return menuTree.sort((a, b) => {
+        return a.sort - b.sort
+      })
     }
   },
   methods: {}

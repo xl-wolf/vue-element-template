@@ -41,3 +41,21 @@ export const getPageTitle = (pageTitle) => {
   }
   return `${title}`;
 };
+
+// webpack require.context 转为数组包装函数
+// export 使用 default
+export const requireContentArray = (r, exinclude) => {
+  let contents = [];
+  const paths = r.keys().filter((p) => {
+    return exinclude.indexOf(p) == -1;
+  });
+  for (let p of paths) {
+    let fn = r(p).default ? r(p).default : r(p);
+    if (fn instanceof Array) {
+      contents = [...contents, ...fn];
+    } else if (fn instanceof Object) {
+      contents.push(fn);
+    }
+  }
+  return contents
+};
