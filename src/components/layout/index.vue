@@ -44,4 +44,7 @@ export default {
     overflow: -moz-scrollbars-none;
   }
 }
+.el-main{
+  padding: 0 !important;
+}
 </style>

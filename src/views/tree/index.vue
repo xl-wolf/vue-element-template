@@ -2,17 +2,19 @@
   <div class="app-main-container">
     <div class="tree-container">
       <el-input clearable v-model="filterText" placeholder="输入关键字" style="margin-bottom:15px;" />
-      <el-tree
-        ref="chinaAreaTree"
-        node-key="id"
-        :data="chinaAreaTreeData"
-        :props="defaultProps"
-        :filter-node-method="filterNode"
-        :default-expanded-keys="defaultExpandedKeys"
-        @node-click="handleNodeClick"
-        @node-expand="addExpandedKeys"
-        @node-collapse="delExpandedKeys"
-      />
+      <div class="tree-area">
+        <el-tree
+          ref="chinaAreaTree"
+          node-key="id"
+          :data="chinaAreaTreeData"
+          :props="defaultProps"
+          :filter-node-method="filterNode"
+          :default-expanded-keys="defaultExpandedKeys"
+          @node-click="handleNodeClick"
+          @node-expand="addExpandedKeys"
+          @node-collapse="delExpandedKeys"
+        />
+      </div>
       <!-- :expand-on-click-node="false" -->
     </div>
   </div>
@@ -95,5 +97,11 @@ export default {
   width: 200px;
   height: inherit;
   overflow: auto;
+  
+  .tree-area {
+    height: calc(100% - 60px);
+    overflow: auto;
+    border-right: 1px solid #efefef;
+  }
 }
 </style>
