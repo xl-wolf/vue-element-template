@@ -60,8 +60,10 @@ export default {
 </script>
 
 <style lang="scss">
-.el-scrollbar__bar.is-horizontal {
-  visibility: hidden;
+.recursionMenu {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: calc(100% - 60px);
 }
 .el-menu--collapse {
   overflow-x: hidden;

@@ -30,8 +30,7 @@ export default {
   background: #545c64;
 }
 .el-aside {
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
   // chrome 和Safari
   &::-webkit-scrollbar {
     width: 0 !important;

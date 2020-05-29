@@ -59,8 +59,10 @@ export default {
 
 <style lang="scss">
 #siderbar {
+  height: inherit;
   .el-menu {
     border: 0;
+    height: inherit;
     .logo-container {
       height: 60px;
       line-height: 60px;
