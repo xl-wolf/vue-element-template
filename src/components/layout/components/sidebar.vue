@@ -5,7 +5,7 @@
       :default-active="activeMenuItem"
       background-color="#545c64"
       text-color="#fff"
-      active-text-color="#ffd04b"
+      :active-text-color="activeTextColor"
       :collapse="menuStatus"
     >
       <!-- 侧边栏顶部logo和项目名称 -->
@@ -14,9 +14,7 @@
         <span :title="projectName">{{projectName}}</span>
       </div>
       <!-- 左侧菜单栏 -->
-      <!-- <el-scrollbar wrap-class="scrollbar-wrapper"> -->
       <recursionMenu :menuTree="menuTree" />
-      <!-- </el-scrollbar> -->
     </el-menu>
   </div>
 </template>
@@ -26,13 +24,11 @@ import { getProjectNameSession, getAvatarSession } from '@/utils/index'
 import { mapGetters } from 'vuex'
 import recursionMenu from './recursionMenu'
 import { routes } from '@/router'
+import styleVariable from '@/styles/variables.scss'
 
 export default {
   name: 'siderbar',
   components: { recursionMenu },
-  data() {
-    return {}
-  },
   computed: {
     avatar() {
       return getAvatarSession()
@@ -51,9 +47,11 @@ export default {
       return menuTree.sort((a, b) => {
         return a.sort - b.sort
       })
+    },
+    activeTextColor() {
+      return styleVariable.primaryColor
     }
-  },
-  methods: {}
+  }
 }
 </script>
 
@@ -89,11 +87,7 @@ export default {
       }
     }
   }
-  .scrollbar-wrapper {
-    overflow-x: hidden !important;
-  }
   background: #545c64;
   height: 100%;
-
 }
 </style>

@@ -148,20 +148,15 @@ export default {
       }
 
       const infoWindow = new BMap.InfoWindow(sContent, opts) // 创建信息窗口对象
-      //判断窗口的打开状态
+      // 判断窗口的打开状态
       if (!infoWindow.isOpen()) {
         //如果没有打开，则监听打开事件，获取按钮，添加事件
         infoWindow.addEventListener('open', function() {
           document.getElementById(dataId).onclick = function(e) {
-            console.log('infoWindow noopened：')
+            console.log('infoWindow noopened：', dataId)
           }
         })
-      } else {
-        //如果已经打开，直接获取按钮，添加事件
-        document.getElementById(dataId).onclick = function(e) {
-          console.log('infoWindow opened：')
-        }
-      }
+      } 
       bmap.openInfoWindow(infoWindow, point) //开启信息窗口
     },
     // 生成点聚合
