@@ -29,4 +29,20 @@ export default {
 .el-header {
   background: #545c64;
 }
+.el-aside {
+  overflow-x: hidden;
+  overflow-y: auto;
+  // chrome 和Safari
+  &::-webkit-scrollbar {
+    width: 0 !important;
+  }
+  // IE 10+
+  & {
+    -ms-overflow-style: none;
+  }
+  // Firefox
+  & {
+    overflow: -moz-scrollbars-none;
+  }
+}
 </style>

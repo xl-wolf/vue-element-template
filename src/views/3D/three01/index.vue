@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="app-main-container">
     <div id="three01-container"></div>
   </div>
 </template>
@@ -65,6 +65,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 #three01-container {
-  height: 600px;
+  height: inherit;
 }
 </style>

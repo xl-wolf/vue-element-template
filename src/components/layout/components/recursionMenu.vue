@@ -3,8 +3,8 @@
   <div class="recursionMenu">
     <template v-for="(menuItem) in menuTree">
       <el-submenu
-        :index="menuItem.path"
-        :key="menuItem.name"
+        :index="menuItem.path+menuItem.name"
+        :key="menuItem.path+menuItem.name"
         v-if="!menuItem.hidden&&menuItem.children&&menuItem.children.length"
       >
         <template slot="title">

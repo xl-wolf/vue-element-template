@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="app-main-container">
     <div id="echarts-pieChart--container"></div>
   </div>
 </template>
@@ -59,6 +59,6 @@ export default {
 
 <style lang="scss" scoped>
 #echarts-pieChart--container {
-  height: 600px;
+  height: inherit;
 }
 </style>

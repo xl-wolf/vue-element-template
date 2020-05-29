@@ -13,7 +13,7 @@ export default {
       },
       hidden: false,
       level: 1,
-      sort:5
+      sort: 6,
     },
   ],
 };

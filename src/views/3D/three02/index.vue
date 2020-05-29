@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="app-main-container">
     <div id="three02-container"></div>
   </div>
 </template>
@@ -199,6 +199,6 @@ export default {
 
 <style lang="scss" scoped>
 #three02-container {
-  height: 600px;
+  height: inherit;
 }
 </style>

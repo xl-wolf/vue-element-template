@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="app-main-container">
     <div id="echarts-lineChart--container"></div>
   </div>
 </template>
@@ -71,6 +71,6 @@ export default {
 
 <style lang="scss" scoped>
 #echarts-lineChart--container {
-  height: 600px;
+  height: inherit;
 }
 </style>

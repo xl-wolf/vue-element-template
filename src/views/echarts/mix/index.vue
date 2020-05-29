@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="app-main-container">
     <div id="echarts-mixChart--container"></div>
   </div>
 </template>
@@ -60,6 +60,6 @@ export default {
 
 <style lang="scss" scoped>
 #echarts-mixChart--container {
-  height: 600px;
+  height: inherit;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="app-main-container">
     <div id="threeVR-container"></div>
   </div>
 </template>
@@ -236,6 +236,6 @@ export default {
 
 <style lang="scss" scoped>
 #threeVR-container {
-  height: 600px;
+  height: inherit;
 }
 </style>

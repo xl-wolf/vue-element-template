@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="app-main-container">
     <div id="echarts-map--container"></div>
   </div>
 </template>
@@ -191,6 +191,6 @@ export default {
 
 <style lang="scss" scoped>
 #echarts-map--container {
-  height: 600px;
+  height: inherit;
 }
 </style>

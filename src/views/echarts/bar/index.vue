@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="app-main-container">
     <div id="echarts-bar--container"></div>
   </div>
 </template>
@@ -70,6 +70,6 @@ export default {
 
 <style lang="scss" scoped>
 #echarts-bar--container {
-  height: 600px;
+  height: inherit;
 }
 </style>

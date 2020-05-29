@@ -6,6 +6,48 @@
   "description": "个人vue+element全栈项目（前端）",
   "glyphs": [
     {
+      "icon_id": "562673",
+      "name": "Bar chart",
+      "font_class": "barchart",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
+      "icon_id": "4448563",
+      "name": "pie",
+      "font_class": "pie",
+      "unicode": "e67e",
+      "unicode_decimal": 59006
+    },
+    {
+      "icon_id": "4766298",
+      "name": "line chart",
+      "font_class": "linechart",
+      "unicode": "e7af",
+      "unicode_decimal": 59311
+    },
+    {
+      "icon_id": "4813178",
+      "name": "混合云数据备份",
+      "font_class": "hunheyunshujubeifen",
+      "unicode": "e657",
+      "unicode_decimal": 58967
+    },
+    {
+      "icon_id": "8017562",
+      "name": "echarts_mappie",
+      "font_class": "echarts_mappie",
+      "unicode": "e6bd",
+      "unicode_decimal": 59069
+    },
+    {
+      "icon_id": "8017656",
+      "name": "echarts_heatmap",
+      "font_class": "echarts_heatmap",
+      "unicode": "e6d6",
+      "unicode_decimal": 59094
+    },
+    {
       "icon_id": "880323",
       "name": "home",
       "font_class": "home",

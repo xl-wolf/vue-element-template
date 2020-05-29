@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="app-main-container">
     <div class="tree-container">
       <el-input clearable v-model="filterText" placeholder="输入关键字" style="margin-bottom:15px;" />
       <el-tree
@@ -93,7 +93,7 @@ export default {
 <style lang="scss">
 .tree-container {
   width: 200px;
-  height: 600px;
+  height: inherit;
   overflow: auto;
 }
 </style>

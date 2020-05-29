@@ -92,5 +92,6 @@ export default {
   }
   background: #545c64;
   height: 100%;
+
 }
 </style>
