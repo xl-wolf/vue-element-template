@@ -1,6 +1,6 @@
 <template>
   <el-container class="h100p">
-    <el-aside class="h100p" :width="menuStatus?'auto':'200px'">
+    <el-aside class="h100p" :width="menuStatus?'auto':sideBarWidth">
       <sidebar class="h100p" />
     </el-aside>
     <el-container>
@@ -19,9 +19,10 @@ import sidebar from './components/sidebar'
 import headerNav from './components/headerNav'
 import appMain from './components/appMain'
 import { mapGetters } from 'vuex'
+import {sideBarWidth} from '@/styles/variables.scss'
 export default {
   components: { sidebar, headerNav, appMain },
-  computed: { ...mapGetters(['menuStatus']) }
+  computed: { ...mapGetters(['menuStatus']),sideBarWidth(){return sideBarWidth} }
 }
 </script>
 
@@ -44,7 +45,7 @@ export default {
     overflow: -moz-scrollbars-none;
   }
 }
-.el-main{
+.el-main {
   padding: 0 !important;
 }
 </style>
