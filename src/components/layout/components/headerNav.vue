@@ -4,9 +4,13 @@
       <i :class="!menuStatus?'el-icon-s-fold':'el-icon-s-unfold'" @click="toggleMenuCollapse"></i>
     </div>
     <div>
+      <img class="img setting" src="@/assets/images/setting.png" @click="showSettingDrawer" />
       <img class="img" :src="avatar" />
       <el-dropdown trigger="hover">
-        <i style="color:#fff;position: relative;top: 16px;cursor:pointer" class="el-icon-caret-bottom"></i>
+        <i
+          style="color:#fff;position: relative;top: 16px;cursor:pointer"
+          class="el-icon-caret-bottom"
+        ></i>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>
             <a target="_blank" href="https://github.com/xl-wolf/vue-element-template">项目地址</a>
@@ -17,14 +21,22 @@
         </el-dropdown-menu>
       </el-dropdown>
     </div>
+    <settingDrawer :visible="drawerVisible" @beforeDrawerClose="handleBeforeDrawerClose" />
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import { getAvatarSession } from '@/utils/index'
+import settingDrawer from './settingDrawer'
 export default {
   name: 'headerNav',
+  components: { settingDrawer },
+  data() {
+    return {
+      drawerVisible: false
+    }
+  },
   computed: {
     ...mapGetters(['menuStatus']),
     avatar() {
@@ -44,6 +56,13 @@ export default {
         .catch(err => {
           console.log(err)
         })
+    },
+    showSettingDrawer() {
+      console.log('showSettingDrawer')
+      this.drawerVisible = true
+    },
+    handleBeforeDrawerClose() {
+      this.drawerVisible = false
     }
   }
 }
@@ -71,6 +90,12 @@ export default {
     border-radius: 6px;
     vertical-align: middle;
     margin-right: 12px;
+    &.setting {
+      width: 28px;
+      height: 28px;
+      margin-right: 24px;
+      cursor: pointer;
+    }
   }
 }
 </style>
