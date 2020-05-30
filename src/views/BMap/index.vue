@@ -8,6 +8,7 @@
 <script>
 import asyncBMapLoader from '@/utils/asyncBMapLoader'
 import { style_1, style_2 } from './style'
+import { bmapPointsApi } from '@/apis/map'
 export default {
   name: 'BMap',
   data() {
@@ -115,13 +116,18 @@ export default {
       return marker
     },
     // 随机生成当前位置旁边的10个点标记-->后期的ajax请求
-    generateNearBy10Markers(map, e) {
+    async generateNearBy10Markers(map, e) {
       const vm = this
-      for (let i = 0; i < 10; i++) {
-        const point = new BMap.Point(
-          e.point['lng'] + (Math.random() - 0.5) * 0.08,
-          e.point['lat'] + (Math.random() - 0.5) * 0.08
-        )
+      const currentPosition = [
+        e.point['lng'] + (Math.random() - 0.5) * 0.08,
+        e.point['lat'] + (Math.random() - 0.5) * 0.08
+      ]
+      const reqParams = { currentPosition: currentPosition }
+      const bmapRes = await bmapPointsApi(reqParams)
+      console.log('bmapPointsApi', bmapRes)
+      const points = bmapRes.data
+      for (let i = 0; i < points.length; i++) {
+        const point = new BMap.Point(...points[i])
         // 把地图上所有的点压人当前地图内的点数组
         vm.currentPoints.push(point)
         const iconConfig = { url: require('./images/blue.png'), size: { width: 20, height: 20 } }

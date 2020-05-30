@@ -8,6 +8,7 @@
 <script>
 import asyncAMapLoader from '@/utils/asyncAMapLoader'
 import { style1, style2, style3 } from './mapStyles'
+import { amapPointsApi } from '@/apis/map'
 export default {
   name: 'AMap',
   data() {
@@ -138,19 +139,21 @@ export default {
       return marker
     },
     // 随机生成当前位置旁边的10个点标记-->后期的ajax请求
-    generateNearBy10Markers() {
+    async generateNearBy10Markers() {
       const vm = this
-      for (let i = 0; i < 10; i++) {
+      const reqParams = { currentPosition: vm.currentPosition }
+      const amapRes = await amapPointsApi(reqParams)
+      console.log('amapPointsApi', amapRes)
+      const points = amapRes.data
+      for (let i = 0; i < points.length; i++) {
         const icon = new AMap.Icon({
           size: new AMap.Size(20, 20),
           image: require('./images/blue.png'), //自定义icon
           imageSize: new AMap.Size(20, 20),
           imageOffset: new AMap.Pixel(0, 0)
         })
-        const position = [
-          vm.currentPosition[0] + (Math.random() - 0.5) * 0.08,
-          vm.currentPosition[1] + (Math.random() - 0.5) * 0.08
-        ]
+       console.log(points[i])
+        const position = points[i]
         const marker = vm.addAMapMarker(icon, position)
         marker.dataId = i
         vm.curMarkersArray.push(marker)
