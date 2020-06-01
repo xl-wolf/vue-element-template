@@ -4,7 +4,7 @@
       <i :class="!menuStatus?'el-icon-s-fold':'el-icon-s-unfold'" @click="toggleMenuCollapse"></i>
     </div>
     <div>
-      <img class="img setting" src="@/assets/images/setting.png" @click="showSettingDrawer" />
+      <!-- <img class="img setting" src="@/assets/images/setting.png" @click="showSettingDrawer" /> -->
       <img class="img" :src="avatar" />
       <el-dropdown trigger="hover">
         <i
@@ -21,7 +21,7 @@
         </el-dropdown-menu>
       </el-dropdown>
     </div>
-    <settingDrawer :visible="drawerVisible" @beforeDrawerClose="handleBeforeDrawerClose" />
+    <!-- <settingDrawer :visible="drawerVisible" @beforeDrawerClose="handleBeforeDrawerClose" /> -->
   </div>
 </template>
 
