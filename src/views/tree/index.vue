@@ -1,5 +1,5 @@
 <template>
-  <div class="app-main-container">
+  <div class="app-main-container" style="display:flex;">
     <div class="tree-container">
       <el-input clearable v-model="filterText" placeholder="输入关键字" style="margin-bottom:15px;" />
       <div class="tree-area">
@@ -17,11 +17,21 @@
       </div>
       <!-- :expand-on-click-node="false" -->
     </div>
+    <div id="echarts-3d-map-container" class="echarts-3d-map-container"></div>
   </div>
 </template>
 
 <script>
 import chinaAreaTree from './chinaProvincesAndCities'
+// 引入基本模板
+import Echarts from 'echarts/lib/echarts'
+import 'echarts/map/js/china'
+import 'echarts-gl/dist/echarts-gl.min.js'
+// 引入柱状图基本配置文件
+import mapOpts, { geoCoordMap } from './mapOpts'
+
+import { treeApi, mapProvinceDataApi } from '@/apis/tree'
+
 export default {
   data() {
     return {
@@ -31,7 +41,9 @@ export default {
         children: 'children',
         label: 'label'
       },
-      defaultExpandedKeys: []
+      defaultExpandedKeys: [],
+
+      mapEchartsRef: null
     }
   },
 
@@ -42,8 +54,8 @@ export default {
   },
 
   mounted() {
-    this.chinaAreaTreeData = this.treeRecursion(chinaAreaTree)
-    console.log(this.chinaAreaTreeData)
+    this.loadMapTreeData()
+    this.initMapEchart()
   },
 
   methods: {
@@ -86,22 +98,65 @@ export default {
       }
     },
     // 树节点点击事件
-    handleNodeClick(node, data, value) {
-      console.log(node, data, value)
+    handleNodeClick(data, node, value) {
+      // console.log(node, data, value)
+      this.loadProvinceData(data)
+    },
+    // ajax请求加载左侧树
+    async loadMapTreeData() {
+      const resTree = await treeApi()
+      this.chinaAreaTreeData = this.treeRecursion(resTree.data)
+    },
+    // ajax请求加载地图数据
+    async loadProvinceData(data) {
+      const resProvinceData = await mapProvinceDataApi(data)
+      console.log(resProvinceData, geoCoordMap)
+      let res = []
+      if (resProvinceData.data && resProvinceData.data.length) {
+        for (name in geoCoordMap) {
+          if (name === resProvinceData.data[0].name) {
+            console.log(name)
+            res.push({'name':name,'value':[...geoCoordMap[name],resProvinceData.data[0].value]})
+          }
+        }
+      }
+      console.log(res)
+      mapOpts.series[0].data = res
+      this.mapEchartsRef.setOption(mapOpts)
+    },
+
+    initMapEchart() {
+      // 获取echarts容器与其引用
+      const mapEchartsContainer = document.getElementById('echarts-3d-map-container')
+      this.mapEchartsRef = Echarts.init(mapEchartsContainer)
+      // this.generateMapData().then(res => {
+      // console.log(res)
+      // mapOpts.series = res
+      // 使用指定的配置项和数据显示图表
+      console.log(mapOpts)
+      this.mapEchartsRef.setOption(mapOpts)
+      // })
+      window.onresize = this.mapEchartsRef.resize
     }
   }
 }
 </script>
 <style lang="scss">
 .tree-container {
-  width: 200px;
+  flex: 0 0 200px;
   height: inherit;
   overflow: auto;
-  
+
   .tree-area {
     height: calc(100% - 60px);
     overflow: auto;
     border-right: 1px solid #efefef;
   }
+}
+#echarts-3d-map-container {
+  margin-left: 10px;
+  background: #2b2f3a;
+  width: 100%;
+  height: 100%;
 }
 </style>
