@@ -100,7 +100,9 @@ export default {
     // 树节点点击事件
     handleNodeClick(data, node, value) {
       // console.log(node, data, value)
-      this.loadProvinceData(data)
+      if (data.level) {
+        this.loadProvinceData(data)
+      }
     },
     // ajax请求加载左侧树
     async loadMapTreeData() {
@@ -116,7 +118,7 @@ export default {
         for (name in geoCoordMap) {
           if (name === resProvinceData.data[0].name) {
             console.log(name)
-            res.push({'name':name,'value':[...geoCoordMap[name],resProvinceData.data[0].value]})
+            res.push({ name: name, value: [...geoCoordMap[name], resProvinceData.data[0].value] })
           }
         }
       }
