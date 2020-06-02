@@ -39,6 +39,17 @@ export default {
           level: 2,
         },
         {
+          path: "three03",
+          name: "three03",
+          component: () => import("@/views/3D/three03/index"),
+          meta: {
+            title: "three03",
+            icon: "xl-icon-rotate3d",
+            role: ["admin", "guest"],
+          },
+          level: 2,
+        },
+        {
           path: "threeVR",
           name: "threeVR",
           component: () => import("@/views/3D/threeVR/index"),

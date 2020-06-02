@@ -6,6 +6,27 @@
   "description": "个人vue+element全栈项目（前端）",
   "glyphs": [
     {
+      "icon_id": "128044",
+      "name": "3d",
+      "font_class": "3d1",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "703563",
+      "name": "rotate-3d",
+      "font_class": "rotate3d",
+      "unicode": "ea53",
+      "unicode_decimal": 59987
+    },
+    {
+      "icon_id": "4236824",
+      "name": "别墅",
+      "font_class": "bieshu",
+      "unicode": "e622",
+      "unicode_decimal": 58914
+    },
+    {
       "icon_id": "10562374",
       "name": "Tree, withered",
       "font_class": "Treewithered",
