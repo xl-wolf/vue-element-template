@@ -14,8 +14,12 @@ import {
   SkyGeometry
 } from 'three/examples/jsm/misc/RollerCoaster.js'
 import { VRButton } from 'three/examples/jsm/webxr/VRButton.js'
+import { mapGetters } from 'vuex'
 export default {
   name: 'threeVR',
+  computed: {
+    ...mapGetters(['menuStatus'])
+  },
   data() {
     return {
       renderer: null,
@@ -32,6 +36,15 @@ export default {
       curve: null,
       WIDTH: null,
       HEIGHT: null
+    }
+  },
+  watch: {
+    menuStatus: {
+      deep: false,
+      immediate: false,
+      handler: function(val, oldVal) {
+        this.onWindowResize()
+      }
     }
   },
   mounted() {
@@ -191,6 +204,7 @@ export default {
     this.renderer.setAnimationLoop(this.render)
   },
   methods: {
+    // onWindowResize是可以抽象出一个mixins文件的方法提供给3d目录下的所有组件使用
     onWindowResize() {
       const VRcontainer = document.getElementById('threeVR-container')
       // 加if判断防止事件监听在离开本页面后因获取不到VRcontainer而报错

@@ -127,14 +127,14 @@ export default {
 #listArea {
   overflow: hidden;
   position: relative;
-  transition: 0.7s;
+  transition: .4s;
 }
 .swiper {
   &-list {
     height: inherit;
     padding: 5px 0;
     position: absolute;
-    transition: 0.7s;
+    transition: .4s;
     left: 0;
     display: flex;
   }

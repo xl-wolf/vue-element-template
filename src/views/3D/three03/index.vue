@@ -24,6 +24,7 @@ export default {
   },
   data() {
     return {
+      domArray: [],
       WIDTH: null,
       HEIGHT: null,
       camera: null,
@@ -165,10 +166,15 @@ export default {
       this.controls.addEventListener('change', this.render)
 
       const button1 = document.getElementById('table')
+      // 默认为表格
+      !this.domArray.some((domi)=>{return button1===domi})&&this.domArray.push(button1)
+      this.toggleActiveClass(button1)
       button1.addEventListener(
         'click',
         () => {
           this.transform(this.targets.table, 2000)
+          !this.domArray.some((domi)=>{return button1===domi})&&this.domArray.push(button1)
+          this.toggleActiveClass(button1)
         },
         false
       )
@@ -178,6 +184,8 @@ export default {
         'click',
         () => {
           this.transform(this.targets.sphere, 2000)
+          !this.domArray.some((domi)=>{return button2===domi})&&this.domArray.push(button2)
+          this.toggleActiveClass(button2)
         },
         false
       )
@@ -187,6 +195,8 @@ export default {
         'click',
         () => {
           this.transform(this.targets.helix, 2000)
+          !this.domArray.some((domi)=>{return button3===domi})&&this.domArray.push(button3)
+          this.toggleActiveClass(button3)
         },
         false
       )
@@ -196,6 +206,8 @@ export default {
         'click',
         () => {
           this.transform(this.targets.grid, 2000)
+          !this.domArray.some((domi)=>{return button4===domi})&&this.domArray.push(button4)
+          this.toggleActiveClass(button4)
         },
         false
       )
@@ -233,6 +245,7 @@ export default {
         .onUpdate(this.render)
         .start()
     },
+    // onWindowResize是可以抽象出一个mixins文件的方法提供给3d目录下的所有组件使用
     onWindowResize() {
       const container = document.getElementById('three03-container')
       this.WIDTH = container.clientWidth
@@ -251,6 +264,12 @@ export default {
     },
     render() {
       this.renderer.render(this.scene, this.camera)
+    },
+    toggleActiveClass(dom) {
+      this.domArray.forEach(domItem => {
+        domItem.className = ''
+      })
+      dom.className = 'active'
     }
   }
 }
@@ -320,6 +339,10 @@ button {
     background-color: rgba(0, 255, 255, 0.5);
   }
   &:active {
+    color: #000000;
+    background-color: rgba(0, 255, 255, 0.75);
+  }
+  &.active {
     color: #000000;
     background-color: rgba(0, 255, 255, 0.75);
   }

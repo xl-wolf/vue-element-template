@@ -6,8 +6,12 @@
 
 <script>
 import * as Three from 'three'
+import { mapGetters } from 'vuex'
 export default {
   name: 'three01',
+  computed: {
+    ...mapGetters(['menuStatus'])
+  },
   data() {
     return {
       camera: null,
@@ -25,15 +29,21 @@ export default {
       this.onWindowResize()
     }
   },
+  watch: {
+    menuStatus: {
+      deep: false,
+      immediate: false,
+      handler: function(val, oldVal) {
+        this.onWindowResize()
+      }
+    }
+  },
   methods: {
     init() {
       const container = document.getElementById('three01-container')
-      this.camera = new Three.PerspectiveCamera(
-        70,
-        container.clientWidth / container.clientHeight,
-        0.01,
-        10
-      )
+      this.WIDTH = container.clientWidth
+      this.HEIGHT = container.clientHeight
+      this.camera = new Three.PerspectiveCamera(70, this.WIDTH / this.HEIGHT, 0.01, 10)
       this.camera.position.z = 0.6
       this.scene = new Three.Scene()
       const geometry = new Three.BoxGeometry(0.2, 0.2, 0.2)
@@ -42,7 +52,7 @@ export default {
       this.scene.add(this.mesh)
 
       this.renderer = new Three.WebGLRenderer({ antialias: true })
-      this.renderer.setSize(container.clientWidth, container.clientHeight)
+      this.renderer.setSize(this.WIDTH, this.HEIGHT)
       container.appendChild(this.renderer.domElement)
     },
     animate() {
@@ -54,6 +64,7 @@ export default {
     onWindowResize() {
       const VRcontainer = document.getElementById('three01-container')
       // 加if判断防止事件监听在离开本页面后因获取不到VRcontainer而报错
+      // onWindowResize是可以抽象出一个mixins文件的方法提供给3d目录下的所有组件使用
       if (VRcontainer) {
         this.WIDTH = VRcontainer.clientWidth
         this.HEIGHT = VRcontainer.clientHeight

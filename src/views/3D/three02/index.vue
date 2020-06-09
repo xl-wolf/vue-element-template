@@ -8,9 +8,13 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { Reflector } from 'three/examples/jsm/objects/Reflector.js'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'three02',
+  computed: {
+    ...mapGetters(['menuStatus'])
+  },
   data() {
     return {
       WIDTH: null,
@@ -27,11 +31,32 @@ export default {
       smallSphere2: null
     }
   },
+  watch: {
+    menuStatus: {
+      deep: false,
+      immediate: false,
+      handler: function(val, oldVal) {
+        this.onWindowResize()
+      }
+    }
+  },
   mounted() {
     this.init()
     this.animate()
   },
   methods: {
+    // onWindowResize是可以抽象出一个mixins文件的方法提供给3d目录下的所有组件使用
+    onWindowResize() {
+      const VRcontainer = document.getElementById('three02-container')
+      // 加if判断防止事件监听在离开本页面后因获取不到VRcontainer而报错
+      if (VRcontainer) {
+        this.WIDTH = VRcontainer.clientWidth
+        this.HEIGHT = VRcontainer.clientHeight
+        this.camera.aspect = this.WIDTH / this.HEIGHT
+        this.camera.updateProjectionMatrix()
+        this.renderer.setSize(this.WIDTH, this.HEIGHT)
+      }
+    },
     init() {
       const container = document.getElementById('three02-container')
       this.WIDTH = container.clientWidth
@@ -170,6 +195,7 @@ export default {
       let blueLight = new THREE.PointLight(0x7f7fff, 0.25, 1000)
       blueLight.position.set(0, 50, 550)
       this.scene.add(blueLight)
+      window.addEventListener('resize', this.onWindowResize, false)
     },
     animate() {
       requestAnimationFrame(this.animate)
