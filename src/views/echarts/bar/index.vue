@@ -19,8 +19,27 @@ import 'echarts/lib/component/legendScroll' //图例翻译滚动
 import chartOpts from './chartOpts'
 // 引入echarts主题配置文件
 import { _01, _02 } from './themes'
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'bar',
+  data() {
+    return {
+      barEchartsRef: null
+    }
+  },
+  computed: {
+    ...mapGetters(['menuStatus'])
+  },
+  watch: {
+    menuStatus: {
+      deep: false,
+      immediate: false,
+      handler: function(val, oldVal) {
+        this.onWindowResize()
+      }
+    }
+  },
   created() {
     // 注册主题
     this.registerTheme()
@@ -38,7 +57,7 @@ export default {
     initBarEchart() {
       // 获取echarts容器与其引用
       const barEchartsContainer = document.getElementById('echarts-bar--container')
-      const barEchartsRef = Echarts.init(barEchartsContainer, 'theme_01')
+      this.barEchartsRef = Echarts.init(barEchartsContainer, 'theme_01')
       this.generateChartData().then(res => {
         // console.log(res)
         const { xAxisData, data1, data2 } = res
@@ -46,9 +65,12 @@ export default {
         chartOpts.series[0].data = data1
         chartOpts.series[1].data = data2
         // 使用指定的配置项和数据显示图表
-        barEchartsRef.setOption(chartOpts)
+        this.barEchartsRef.setOption(chartOpts)
       })
-      window.onresize = barEchartsRef.resize
+      window.onresize = this.onWindowResize
+    },
+    onWindowResize() {
+      this.barEchartsRef.resize()
     },
     // 生成随机数据-->后期的ajax请求
     generateChartData() {

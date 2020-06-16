@@ -20,8 +20,27 @@ import 'echarts/lib/component/legendScroll' //图例翻译滚动
 import chartOpts from './chartOpts'
 // 引入echarts主题配置文件
 import { theme_01, theme_02 } from './themes'
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'mixChart',
+  data() {
+    return {
+      mixEchartsRef: null
+    }
+  },
+  computed: {
+    ...mapGetters(['menuStatus'])
+  },
+  watch: {
+    menuStatus: {
+      deep: false,
+      immediate: false,
+      handler: function(val, oldVal) {
+        this.onWindowResize()
+      }
+    }
+  },
   created() {
     // 注册主题
     this.registerTheme()
@@ -39,14 +58,17 @@ export default {
     initMixEchart() {
       // 获取echarts容器与其引用
       const mixEchartsContainer = document.getElementById('echarts-mixChart--container')
-      const mixEchartsRef = Echarts.init(mixEchartsContainer, 'theme_02')
+      this.mixEchartsRef = Echarts.init(mixEchartsContainer, 'theme_02')
       this.generateChartData().then(res => {
         console.log(res)
         const chartOpts = res
         // 使用指定的配置项和数据显示图表
-        mixEchartsRef.setOption(chartOpts)
+        this.mixEchartsRef.setOption(chartOpts)
       })
-      window.onresize = mixEchartsRef.resize
+      window.onresize = this.onWindowResize
+    },
+    onWindowResize() {
+      this.mixEchartsRef.resize()
     },
     // 生成随机数据-->后期的ajax请求
     generateChartData() {

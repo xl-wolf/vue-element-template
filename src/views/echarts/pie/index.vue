@@ -19,8 +19,27 @@ import 'echarts/lib/component/legendScroll' //图例翻译滚动
 import chartOpts from './chartOpts'
 // 引入echarts主题配置文件
 import { theme_01, theme_02 } from './themes'
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'pieChart',
+  data() {
+    return {
+      pieEchartsRef: null
+    }
+  },
+  computed: {
+    ...mapGetters(['menuStatus'])
+  },
+  watch: {
+    menuStatus: {
+      deep: false,
+      immediate: false,
+      handler: function(val, oldVal) {
+        this.onWindowResize()
+      }
+    }
+  },
   created() {
     // 注册主题
     this.registerTheme()
@@ -38,14 +57,17 @@ export default {
     initPieEchart() {
       // 获取echarts容器与其引用
       const pieEchartsContainer = document.getElementById('echarts-pieChart--container')
-      const pieEchartsRef = Echarts.init(pieEchartsContainer, 'theme_02')
+      this.pieEchartsRef = Echarts.init(pieEchartsContainer, 'theme_02')
       this.generateChartData().then(res => {
         console.log(res)
         const chartOpts = res
         // // 使用指定的配置项和数据显示图表
-        pieEchartsRef.setOption(chartOpts)
+        this.pieEchartsRef.setOption(chartOpts)
       })
-      window.onresize = pieEchartsRef.resize
+      window.onresize = this.onWindowResize
+    },
+    onWindowResize() {
+      this.pieEchartsRef.resize()
     },
     // 生成随机数据-->后期的ajax请求
     generateChartData() {

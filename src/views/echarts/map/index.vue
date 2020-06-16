@@ -18,8 +18,27 @@ import 'echarts/lib/component/legend'
 import mapOpts, { geoCoordMap, planePath, convertData, color } from './mapOpts'
 // 引入echarts主题配置文件
 import { theme_01, theme_02 } from './themes'
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'echartsMap',
+  data() {
+    return {
+      mapEchartsRef: null
+    }
+  },
+  computed: {
+    ...mapGetters(['menuStatus'])
+  },
+  watch: {
+    menuStatus: {
+      deep: false,
+      immediate: false,
+      handler: function(val, oldVal) {
+        this.onWindowResize()
+      }
+    }
+  },
   created() {
     // 注册主题
     this.registerTheme()
@@ -37,14 +56,17 @@ export default {
     initMapEchart() {
       // 获取echarts容器与其引用
       const mapEchartsContainer = document.getElementById('echarts-map--container')
-      const mapEchartsRef = Echarts.init(mapEchartsContainer, 'theme_02')
+      this.mapEchartsRef = Echarts.init(mapEchartsContainer, 'theme_02')
       this.generateMapData().then(res => {
         // console.log(res)
         mapOpts.series = res
         // 使用指定的配置项和数据显示图表
-        mapEchartsRef.setOption(mapOpts)
+        this.mapEchartsRef.setOption(mapOpts)
       })
-      window.onresize = mapEchartsRef.resize
+      window.onresize = this.onWindowResize
+    },
+    onWindowResize() {
+      this.mapEchartsRef.resize()
     },
     // 生成随机数据-->后期的ajax请求
     generateMapData() {

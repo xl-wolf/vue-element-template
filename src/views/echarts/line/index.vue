@@ -19,8 +19,27 @@ import 'echarts/lib/component/legendScroll' //图例翻译滚动
 import chartOpts from './chartOpts'
 // 引入echarts主题配置文件
 import { theme_01, theme_02 } from './themes'
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'lineChart',
+  data() {
+    return {
+      lineEchartsRef: null
+    }
+  },
+  computed: {
+    ...mapGetters(['menuStatus'])
+  },
+  watch: {
+    menuStatus: {
+      deep: false,
+      immediate: false,
+      handler: function(val, oldVal) {
+        this.onWindowResize()
+      }
+    }
+  },
   created() {
     // 注册主题
     this.registerTheme()
@@ -38,16 +57,19 @@ export default {
     initLineEchart() {
       // 获取echarts容器与其引用
       const lineEchartsContainer = document.getElementById('echarts-lineChart--container')
-      const lineEchartsRef = Echarts.init(lineEchartsContainer, 'theme_02')
+      this.lineEchartsRef = Echarts.init(lineEchartsContainer, 'theme_02')
       this.generateChartData().then(res => {
         console.log(res)
         const { date, data } = res
         chartOpts.xAxis.data = date
         chartOpts.series[0].data = data
         // 使用指定的配置项和数据显示图表
-        lineEchartsRef.setOption(chartOpts)
+        this.lineEchartsRef.setOption(chartOpts)
       })
-      window.onresize = lineEchartsRef.resize
+      window.onresize = this.onWindowResize
+    },
+    onWindowResize() {
+      this.lineEchartsRef.resize()
     },
     // 生成随机数据-->后期的ajax请求
     generateChartData() {
