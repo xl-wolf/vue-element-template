@@ -20,9 +20,11 @@ import chartOpts from './chartOpts'
 // 引入echarts主题配置文件
 import { theme_01, theme_02 } from './themes'
 import { mapGetters } from 'vuex'
+import mixins from '../mixins'
 
 export default {
   name: 'pieChart',
+  mixins:[mixins],
   data() {
     return {
       pieEchartsRef: null
@@ -36,7 +38,7 @@ export default {
       deep: false,
       immediate: false,
       handler: function(val, oldVal) {
-        this.onWindowResize()
+        this.onWindowResize(this.pieEchartsRef)
       }
     }
   },
@@ -64,10 +66,7 @@ export default {
         // // 使用指定的配置项和数据显示图表
         this.pieEchartsRef.setOption(chartOpts)
       })
-      window.onresize = this.onWindowResize
-    },
-    onWindowResize() {
-      this.pieEchartsRef.resize()
+      window.onresize = this.onWindowResize.bind(null,this.pieEchartsRef)
     },
     // 生成随机数据-->后期的ajax请求
     generateChartData() {

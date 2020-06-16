@@ -20,9 +20,11 @@ import chartOpts from './chartOpts'
 // 引入echarts主题配置文件
 import { _01, _02 } from './themes'
 import { mapGetters } from 'vuex'
+import mixins from '../mixins'
 
 export default {
   name: 'bar',
+  mixins:[mixins],
   data() {
     return {
       barEchartsRef: null
@@ -36,7 +38,7 @@ export default {
       deep: false,
       immediate: false,
       handler: function(val, oldVal) {
-        this.onWindowResize()
+        this.onWindowResize(this.barEchartsRef)
       }
     }
   },
@@ -67,10 +69,7 @@ export default {
         // 使用指定的配置项和数据显示图表
         this.barEchartsRef.setOption(chartOpts)
       })
-      window.onresize = this.onWindowResize
-    },
-    onWindowResize() {
-      this.barEchartsRef.resize()
+      window.onresize = this.onWindowResize.bind(null,this.barEchartsRef)
     },
     // 生成随机数据-->后期的ajax请求
     generateChartData() {

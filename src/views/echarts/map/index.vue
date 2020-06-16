@@ -19,9 +19,11 @@ import mapOpts, { geoCoordMap, planePath, convertData, color } from './mapOpts'
 // 引入echarts主题配置文件
 import { theme_01, theme_02 } from './themes'
 import { mapGetters } from 'vuex'
+import mixins from '../mixins'
 
 export default {
   name: 'echartsMap',
+  mixins:[mixins],
   data() {
     return {
       mapEchartsRef: null
@@ -35,7 +37,7 @@ export default {
       deep: false,
       immediate: false,
       handler: function(val, oldVal) {
-        this.onWindowResize()
+        this.onWindowResize(this.mapEchartsRef)
       }
     }
   },
@@ -63,10 +65,7 @@ export default {
         // 使用指定的配置项和数据显示图表
         this.mapEchartsRef.setOption(mapOpts)
       })
-      window.onresize = this.onWindowResize
-    },
-    onWindowResize() {
-      this.mapEchartsRef.resize()
+      window.onresize = this.onWindowResize.bind(null,this.mapEchartsRef)
     },
     // 生成随机数据-->后期的ajax请求
     generateMapData() {

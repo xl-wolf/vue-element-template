@@ -21,9 +21,11 @@ import chartOpts from './chartOpts'
 // 引入echarts主题配置文件
 import { theme_01, theme_02 } from './themes'
 import { mapGetters } from 'vuex'
+import mixins from '../mixins'
 
 export default {
   name: 'mixChart',
+  mixins:[mixins],
   data() {
     return {
       mixEchartsRef: null
@@ -37,7 +39,7 @@ export default {
       deep: false,
       immediate: false,
       handler: function(val, oldVal) {
-        this.onWindowResize()
+        this.onWindowResize(this.mixEchartsRef)
       }
     }
   },
@@ -65,10 +67,7 @@ export default {
         // 使用指定的配置项和数据显示图表
         this.mixEchartsRef.setOption(chartOpts)
       })
-      window.onresize = this.onWindowResize
-    },
-    onWindowResize() {
-      this.mixEchartsRef.resize()
+      window.onresize = this.onWindowResize.bind(null,this.mixEchartsRef)
     },
     // 生成随机数据-->后期的ajax请求
     generateChartData() {
