@@ -16,6 +16,7 @@
       :class="[iconScale]"
       @click="handleLeftIconClick"
     >
+      <!-- icon 基于elementui 支持自定义 -->
       <i class="el-icon-arrow-left" />
     </div>
     <div
@@ -24,6 +25,7 @@
       :class="[iconScale]"
       @click="handleRightIconClick"
     >
+      <!-- icon 基于elementui 支持自定义 -->
       <i class="el-icon-arrow-right" />
     </div>
   </div>
@@ -98,11 +100,7 @@ export default {
         this.rightClickCount = 0
       }
       const baseWidth = this.list.length * (this.itemWidth + this.itemGap)
-      if (window.innerWidth >= baseWidth) {
-        this.iconShow = false
-      } else {
-        this.iconShow = true
-      }
+      this.iconShow = window.innerWidth < baseWidth
       if (window.innerWidth < baseWidth - 240) {
         this.dynamicNum = this.list.length - 5
       }
@@ -112,10 +110,7 @@ export default {
       if (window.innerWidth <= baseWidth - 447 - (this.itemWidth + this.itemGap)) {
         this.dynamicNum = this.list.length - 3
       }
-      if (
-        window.innerWidth <=
-        baseWidth - 447 - (this.itemWidth + this.itemGap) - (this.itemWidth + this.itemGap)
-      ) {
+      if (window.innerWidth <= baseWidth - 447 - (this.itemWidth + this.itemGap) * 2) {
         this.dynamicNum = this.list.length - 2
       }
     }
@@ -127,14 +122,14 @@ export default {
 #listArea {
   overflow: hidden;
   position: relative;
-  transition: .4s;
+  transition: 0.4s;
 }
 .swiper {
   &-list {
     height: inherit;
     padding: 5px 0;
     position: absolute;
-    transition: .4s;
+    transition: 0.4s;
     left: 0;
     display: flex;
   }

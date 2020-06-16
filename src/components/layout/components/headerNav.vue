@@ -5,6 +5,8 @@
     </div>
     <div>
       <!-- <img class="img setting" src="@/assets/images/setting.png" @click="showSettingDrawer" /> -->
+      
+      <screenFull class="mr16" style="display:inline-block"/>
       <img class="img" :src="avatar" />
       <el-dropdown trigger="hover">
         <i
@@ -29,9 +31,10 @@
 import { mapGetters } from 'vuex'
 import { getAvatarSession } from '@/utils/index'
 import settingDrawer from './settingDrawer'
+import screenFull from './fullScreen'
 export default {
   name: 'headerNav',
-  components: { settingDrawer },
+  components: { settingDrawer, screenFull },
   data() {
     return {
       drawerVisible: false

@@ -1,7 +1,7 @@
 <template>
   <div class="app-main-container">
     <el-card shadow="hover">
-      <vue-typing :text="typingText" :cursorOptions="myCursor" :framerate="4"/>
+      <vue-typing :text="typingText" :cursorOptions="myCursor" :framerate="4" />
     </el-card>
   </div>
 </template>
@@ -17,6 +17,7 @@ export default {
       myCursor: { blinking: true, cursor: '|', color: 'black', framerate: 24 }
     }
   },
+
   mounted() {
     this.startType()
   },
