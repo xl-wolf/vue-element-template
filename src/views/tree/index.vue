@@ -35,7 +35,7 @@ import { mapGetters } from 'vuex'
 import mixins from '../echarts/mixins'
 
 export default {
-  mixins:[mixins],
+  mixins: [mixins],
   computed: {
     ...mapGetters(['menuStatus'])
   },
@@ -136,6 +136,12 @@ export default {
         }
       }
       console.log(res)
+      if (!(res && res.length)) {
+        this.$message({
+          message: '暂无数据',
+          type: 'success'
+        })
+      }
       mapOpts.series[0].data = res
       this.mapEchartsRef.setOption(mapOpts)
     },
@@ -151,7 +157,7 @@ export default {
       // console.log(mapOpts)
       this.mapEchartsRef.setOption(mapOpts)
       // })
-      window.onresize = this.onWindowResize.bind(null,this.mapEchartsRef)
+      window.onresize = this.onWindowResize.bind(null, this.mapEchartsRef)
     }
   }
 }
