@@ -1,6 +1,15 @@
 <template>
   <div class="app-main-container">
     <div id="three03-container"></div>
+    <div id="three03-container-ctrl">
+      <i
+        style="cursor:pointer;font-size:24px"
+        title="点击播放"
+        :class="{'iconfont':true,'xl-icon-pause':paused,'xl-icon-start':!paused}"
+        @click="toggle"
+      ></i>
+    </div>
+
     <div id="three03-container-menu">
       <button id="table">TABLE</button>
       <button id="sphere">SPHERE</button>
@@ -33,7 +42,14 @@ export default {
       controls: null,
       objects: [],
       targets: null,
-      table: null
+      table: null,
+      timer: null,
+      button1: null,
+      button2: null,
+      button3: null,
+      button4: null,
+      idx: 0,
+      paused: false
     }
   },
   watch: {
@@ -50,8 +66,34 @@ export default {
     this.targets = { table: [], sphere: [], helix: [], grid: [] }
     this.init()
     this.animate()
+    // this.swiperItem()
+  },
+  destroyed() {
+    this.clearInterval()
   },
   methods: {
+    clearInterval() {
+      clearInterval(this.timer)
+      this.timer = null
+    },
+    toggle() {
+      this.paused = !this.paused
+      if (!this.paused) {
+        this.clearInterval()
+      } else {
+        this.swiperItem()
+      }
+    },
+    swiperItem() {
+      this.timer = setInterval(() => {
+        if (this.idx < 3) {
+          this.idx++
+        } else {
+          this.idx = 0
+        }
+        ;[this.button1, this.button2, this.button3, this.button4][this.idx].click()
+      }, 10000)
+    },
     init() {
       const container = document.getElementById('three03-container')
       this.WIDTH = container.clientWidth
@@ -165,49 +207,63 @@ export default {
       this.controls.maxDistance = 6000
       this.controls.addEventListener('change', this.render)
 
-      const button1 = document.getElementById('table')
+      this.button1 = document.getElementById('table')
       // 默认为表格
-      !this.domArray.some((domi)=>{return button1===domi})&&this.domArray.push(button1)
-      this.toggleActiveClass(button1)
-      button1.addEventListener(
+      !this.domArray.some(domi => {
+        return this.button1 === domi
+      }) && this.domArray.push(this.button1)
+      this.toggleActiveClass(this.button1)
+      this.button1.addEventListener(
         'click',
         () => {
+          this.idx = 0
           this.transform(this.targets.table, 2000)
-          !this.domArray.some((domi)=>{return button1===domi})&&this.domArray.push(button1)
-          this.toggleActiveClass(button1)
+          !this.domArray.some(domi => {
+            return this.button1 === domi
+          }) && this.domArray.push(this.button1)
+          this.toggleActiveClass(this.button1)
         },
         false
       )
 
-      const button2 = document.getElementById('sphere')
-      button2.addEventListener(
+      this.button2 = document.getElementById('sphere')
+      this.button2.addEventListener(
         'click',
         () => {
+          this.idx = 1
           this.transform(this.targets.sphere, 2000)
-          !this.domArray.some((domi)=>{return button2===domi})&&this.domArray.push(button2)
-          this.toggleActiveClass(button2)
+          !this.domArray.some(domi => {
+            return this.button2 === domi
+          }) && this.domArray.push(this.button2)
+          this.toggleActiveClass(this.button2)
         },
         false
       )
 
-      const button3 = document.getElementById('helix')
-      button3.addEventListener(
+      this.button3 = document.getElementById('helix')
+      this.button3.addEventListener(
         'click',
         () => {
+          this.idx = 2
           this.transform(this.targets.helix, 2000)
-          !this.domArray.some((domi)=>{return button3===domi})&&this.domArray.push(button3)
-          this.toggleActiveClass(button3)
+          !this.domArray.some(domi => {
+            return this.button3 === domi
+          }) && this.domArray.push(this.button3)
+          this.toggleActiveClass(this.button3)
         },
         false
       )
 
-      let button4 = document.getElementById('grid')
-      button4.addEventListener(
+      this.button4 = document.getElementById('grid')
+      this.button4.addEventListener(
         'click',
         () => {
+          this.idx = 3
           this.transform(this.targets.grid, 2000)
-          !this.domArray.some((domi)=>{return button4===domi})&&this.domArray.push(button4)
-          this.toggleActiveClass(button4)
+          !this.domArray.some(domi => {
+            return this.button4 === domi
+          }) && this.domArray.push(this.button4)
+          this.toggleActiveClass(this.button4)
         },
         false
       )
@@ -280,11 +336,19 @@ export default {
   height: inherit;
   background: #000;
 }
+#three03-container-ctrl {
+  position: absolute;
+  top: 40px;
+  width: calc(100% - 40px);
+  padding-right: 20px;
+  text-align: right;
+  color: #fff;
+}
 
 #three03-container-menu {
   position: absolute;
   bottom: 40px;
-  width: 100%;
+  width: calc(100% - 40px);
   text-align: center;
 }
 

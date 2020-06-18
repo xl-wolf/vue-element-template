@@ -6,6 +6,20 @@
   "description": "个人vue+element全栈项目（前端）",
   "glyphs": [
     {
+      "icon_id": "7596031",
+      "name": "pause",
+      "font_class": "pause",
+      "unicode": "e621",
+      "unicode_decimal": 58913
+    },
+    {
+      "icon_id": "212783",
+      "name": "start",
+      "font_class": "start",
+      "unicode": "ea40",
+      "unicode_decimal": 59968
+    },
+    {
       "icon_id": "14341966",
       "name": "full-screen",
       "font_class": "full-screen",
