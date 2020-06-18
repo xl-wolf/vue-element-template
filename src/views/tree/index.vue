@@ -31,8 +31,14 @@ import 'echarts-gl/dist/echarts-gl.min.js'
 import mapOpts, { geoCoordMap } from './mapOpts'
 
 import { treeApi, mapProvinceDataApi } from '@/apis/tree'
+import { mapGetters } from 'vuex'
+import mixins from '../echarts/mixins'
 
 export default {
+  mixins:[mixins],
+  computed: {
+    ...mapGetters(['menuStatus'])
+  },
   data() {
     return {
       filterText: '',
@@ -50,6 +56,13 @@ export default {
   watch: {
     filterText(val) {
       this.$refs.chinaAreaTree.filter(val)
+    },
+    menuStatus: {
+      deep: false,
+      immediate: false,
+      handler: function(val, oldVal) {
+        this.onWindowResize(this.mapEchartsRef)
+      }
     }
   },
 
@@ -135,10 +148,10 @@ export default {
       // console.log(res)
       // mapOpts.series = res
       // 使用指定的配置项和数据显示图表
-      console.log(mapOpts)
+      // console.log(mapOpts)
       this.mapEchartsRef.setOption(mapOpts)
       // })
-      window.onresize = this.mapEchartsRef.resize
+      window.onresize = this.onWindowResize.bind(null,this.mapEchartsRef)
     }
   }
 }
