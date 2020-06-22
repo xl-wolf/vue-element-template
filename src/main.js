@@ -1,4 +1,4 @@
-import Vue from "vue";
+import Vue from "./localVue";
 import "normalize.css/normalize.css"; // 一个现代的css样式重置库
 import ElementUI from "element-ui";
 // import "element-ui/lib/theme-chalk/index.css"; //在theme.scss中引入的@import "~element-ui/packages/theme-chalk/src/index";已经覆盖这边的样式，无需重复引入
