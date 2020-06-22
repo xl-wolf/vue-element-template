@@ -1,6 +1,10 @@
 import axios from "axios";
 import { Loading, Message } from "element-ui";
 let loading = null;
+// const baseURL =
+  // process.env === "development"
+  //   ? "http://172.20.10.5:6066"
+  //   : "http://172.20.10.5:6066";
 const baseURL =
   process.env === "development"
     ? "http://192.168.43.178:6066"
