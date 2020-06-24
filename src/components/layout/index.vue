@@ -29,49 +29,6 @@ export default {
     sideBarWidth() {
       return sideBarWidth
     }
-  },
-  watch: {
-    screenStatus: {
-      deep: true,
-      immediate: false,
-      handler: function(val, oldVal) {
-        this.setFullScreenStatus()
-      }
-    }
-  },
-  methods: {
-    setFullScreenStatus() {
-      if (this.screenStatus) {
-        this.fullScreen(this.$refs.appLayOut)
-      } else {
-        this.exitFullscreen()
-      }
-    },
-
-    fullScreen(dom) {
-      if (dom.requestFullscreen) {
-        dom.requestFullscreen()
-      } else if (dom.msRequestFullscreen) {
-        dom.msRequestFullscreen()
-      } else if (dom.mozRequestFullScreen) {
-        dom.mozRequestFullScreen()
-      } else if (dom.webkitRequestFullscreen) {
-        dom.webkitRequestFullscreen()
-      }
-    },
-
-    //退出全屏
-    exitFullscreen() {
-      if (document.exitFullscreen) {
-        document.exitFullscreen()
-      } else if (document.msExitFullscreen) {
-        document.msExitFullscreen()
-      } else if (document.mozCancelFullScreen) {
-        document.mozCancelFullScreen()
-      } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen()
-      }
-    }
   }
 }
 </script>
