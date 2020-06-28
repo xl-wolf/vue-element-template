@@ -10,7 +10,7 @@
 	var fn = (function () {
 		var val;
 
-		var fnMap = [
+		var fnList = [
 			[
 				'requestFullscreen',
 				'exitFullscreen',
@@ -60,14 +60,14 @@
 		];
 
 		var i = 0;
-		var l = fnMap.length;
+		var l = fnList.length;
 		var ret = {};
 
 		for (; i < l; i++) {
-			val = fnMap[i];
+			val = fnList[i];
 			if (val && val[1] in document) {
 				for (i = 0; i < val.length; i++) {
-					ret[fnMap[0][i]] = val[i];
+					ret[fnList[0][i]] = val[i];
 				}
 				return ret;
 			}
