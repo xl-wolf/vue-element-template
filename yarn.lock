@@ -1358,6 +1358,14 @@ ajv-keywords@^3.1.0, ajv-keywords@^3.4.1:
   resolved "https://registry.npm.taobao.org/ajv-keywords/download/ajv-keywords-3.4.1.tgz#ef916e271c64ac12171fd8384eaae6b2345854da"
   integrity sha1-75FuJxxkrBIXH9g4TqrmsjRYVNo=
 
+ajv@^4.11.2:
+  version "4.11.8"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-4.11.8.tgz#82ffb02b29e662ae53bdc20af15947706739c536"
+  integrity sha1-gv+wKynmYq5TvcIK8VlHcGc5xTY=
+  dependencies:
+    co "^4.6.0"
+    json-stable-stringify "^1.0.1"
+
 ajv@^6.1.0, ajv@^6.10.2, ajv@^6.12.2, ajv@^6.5.5:
   version "6.12.2"
   resolved "https://registry.npm.taobao.org/ajv/download/ajv-6.12.2.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fajv%2Fdownload%2Fajv-6.12.2.tgz#c629c5eced17baf314437918d2da88c99d5958cd"
@@ -2259,6 +2267,11 @@ clone@^1.0.2:
   version "1.0.4"
   resolved "https://registry.npm.taobao.org/clone/download/clone-1.0.4.tgz#da309cc263df15994c688ca902179ca3c7cd7c7e"
   integrity sha1-2jCcwmPfFZlMaIypAheco8fNfH4=
+
+co@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/co/-/co-4.6.0.tgz#6ea6bdf3d853ae54ccb8e47bfa0bf3f9031fb184"
+  integrity sha1-bqa989hTrlTMuOR7+gvz+QMfsYQ=
 
 coa@^2.0.2:
   version "2.0.2"
@@ -4669,6 +4682,13 @@ json-schema@0.2.3:
   resolved "https://registry.npm.taobao.org/json-schema/download/json-schema-0.2.3.tgz#b480c892e59a2f05954ce727bd3f2a4e882f9e13"
   integrity sha1-tIDIkuWaLwWVTOcnvT8qTogvnhM=
 
+json-stable-stringify@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/json-stable-stringify/-/json-stable-stringify-1.0.1.tgz#9a759d39c5f2ff503fd5300646ed445f88c4f9af"
+  integrity sha1-mnWdOcXy/1A/1TAGRu1EX4jE+a8=
+  dependencies:
+    jsonify "~0.0.0"
+
 json-stringify-safe@~5.0.1:
   version "5.0.1"
   resolved "https://registry.npm.taobao.org/json-stringify-safe/download/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
@@ -4704,6 +4724,11 @@ jsonfile@^4.0.0:
   integrity sha1-h3Gq4HmbZAdrdmQPygWPnBDjPss=
   optionalDependencies:
     graceful-fs "^4.1.6"
+
+jsonify@~0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/jsonify/-/jsonify-0.0.0.tgz#2c74b6ee41d93ca51b7b5aaee8f503631d252a73"
+  integrity sha1-LHS27kHZPKUbe1qu6PUDYx0lKnM=
 
 jsprim@^1.2.2:
   version "1.4.1"
@@ -6411,6 +6436,14 @@ punycode@^2.1.0, punycode@^2.1.1:
   resolved "https://registry.npm.taobao.org/punycode/download/punycode-2.1.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fpunycode%2Fdownload%2Fpunycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha1-tYsBCsQMIsVldhbI0sLALHv0eew=
 
+purifycss-webpack@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/purifycss-webpack/-/purifycss-webpack-0.7.0.tgz#07c9ce7988f608f1928102ed3ff19178ce38f0e0"
+  integrity sha1-B8nOeYj2CPGSgQLtP/GReM448OA=
+  dependencies:
+    ajv "^4.11.2"
+    webpack-sources "^0.1.4"
+
 q@^1.1.2:
   version "1.5.1"
   resolved "https://registry.npm.taobao.org/q/download/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
@@ -7115,6 +7148,11 @@ source-list-map@^2.0.0:
   resolved "https://registry.npm.taobao.org/source-list-map/download/source-list-map-2.0.1.tgz#3993bd873bfc48479cca9ea3a547835c7c154b34"
   integrity sha1-OZO9hzv8SEecyp6jpUeDXHwVSzQ=
 
+source-list-map@~0.1.7:
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/source-list-map/-/source-list-map-0.1.8.tgz#c550b2ab5427f6b3f21f5afead88c4f5587b2106"
+  integrity sha1-xVCyq1Qn9rPyH1r+rYjE9Vh7IQY=
+
 source-map-resolve@^0.5.0:
   version "0.5.3"
   resolved "https://registry.npm.taobao.org/source-map-resolve/download/source-map-resolve-0.5.3.tgz?cache=0&sync_timestamp=1584829475930&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fsource-map-resolve%2Fdownload%2Fsource-map-resolve-0.5.3.tgz#190866bece7553e1f8f267a2ee82c606b5509a1a"
@@ -7146,7 +7184,7 @@ source-map@^0.4.2:
   dependencies:
     amdefine ">=0.0.4"
 
-source-map@^0.5.0, source-map@^0.5.6:
+source-map@^0.5.0, source-map@^0.5.6, source-map@~0.5.3:
   version "0.5.7"
   resolved "https://registry.npm.taobao.org/source-map/download/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
   integrity sha1-igOdLRAh0i0eoUyA2OpGi6LvP8w=
@@ -8145,6 +8183,14 @@ webpack-merge@^4.2.2:
   integrity sha1-onxS6ng9E5iv0gh/VH17nS9DY00=
   dependencies:
     lodash "^4.17.15"
+
+webpack-sources@^0.1.4:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/webpack-sources/-/webpack-sources-0.1.5.tgz#aa1f3abf0f0d74db7111c40e500b84f966640750"
+  integrity sha1-qh86vw8NdNtxEcQOUAuE+WZkB1A=
+  dependencies:
+    source-list-map "~0.1.7"
+    source-map "~0.5.3"
 
 webpack-sources@^1.1.0, webpack-sources@^1.4.0, webpack-sources@^1.4.1, webpack-sources@^1.4.3:
   version "1.4.3"

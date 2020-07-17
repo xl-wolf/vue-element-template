@@ -1,5 +1,7 @@
 const path = require("path");
 const defaultSettings = require("./src/settings.js");
+const PurifyCSSPlugin=require('purifycss-webpack'); //css优化去重复无效代码
+const glob=require('glob');  //css优化
 
 function resolve(dir) {
   return path.join(__dirname, dir);
@@ -31,5 +33,11 @@ module.exports = {
         "@": resolve("src"),
       },
     },
+    plugins: [
+      new PurifyCSSPlugin({
+        // Give paths to parse for rules. These should be absolute!
+        paths: glob.sync(path.join(__dirname, 'app/*.html')),
+      })
+    ]
   },
 };
