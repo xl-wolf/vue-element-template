@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
+    "inspect": "vue-cli-service inspect --rule css",
     "start": "npm run serve",
     "build": "vue-cli-service build"
   },
@@ -23,11 +24,12 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.3.0",
     "@vue/cli-service": "^4.3.0",
+    "glob": "^7.1.6",
+    "glob-all": "^3.2.1",
+    "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.12.0",
+    "purgecss-webpack-plugin": "^2.3.0",
     "sass-loader": "^8.0.2",
-    "purify-css":"^1.2.5",
-    "purifycss-webpack":"^0.7.0",
-    "glob":"^7.1.6",
     "vue-template-compiler": "^2.6.11"
   },
   "browserslist": [
