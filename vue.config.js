@@ -22,6 +22,8 @@ module.exports = {
       warnings: false,
       errors: true,
     },
+    // 解决使用natapp内网穿透时出现invalid host header 问题
+    disableHostCheck: true
   },
   
   chainWebpack: (config) => {
