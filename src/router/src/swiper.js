@@ -11,7 +11,7 @@ export default {
         title: "轮播案例",
         icon: "xl-icon-swiperight",
       },
-      hidden: false,
+      hidden: true,
       level: 1,
       sort: 6,
     },
