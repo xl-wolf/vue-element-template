@@ -16,5 +16,5 @@ npm install
 # start server 
 npm run server
 # develop
-npm run dev
+npm start
 
