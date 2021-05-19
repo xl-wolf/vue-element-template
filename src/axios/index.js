@@ -3,12 +3,12 @@ import { Loading, Message } from "element-ui";
 let loading = null;
 const baseURL =
   process.env === "development"
-    ? "http://192.168.251.166:6066"
-    : "http://192.168.251.166:6066";
+    ? "http://localhost:6067"
+    : "http://localhost:6067";
 // const baseURL =
 //   process.env === "development"
-//     ? "http://172.20.10.9:6066"
-//     : "http://172.20.10.9:6066";
+//     ? "http://172.20.10.9:6067"
+//     : "http://172.20.10.9:6067";
 // create an axios instance
 const service = axios.create({
   baseURL: baseURL, // url = base url + request url

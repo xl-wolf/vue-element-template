@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
     "inspect": "vue-cli-service inspect --rule css",
-    "start": "npm run serve",
-    "build": "vue-cli-service build"
+    "start": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "server":"cd ./server && npm i && node main"
   },
   "dependencies": {
     "axios": "0.18.1",

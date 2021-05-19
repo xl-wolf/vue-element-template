@@ -158,7 +158,8 @@ export default {
         marker.dataId = i
         vm.curMarkersArray.push(marker)
         marker.on('click', function() {
-          const { position } = this.B
+          // console.log(this)
+          const { position } = this.B||this.De
           // console.log(this, position)
           this.contentInfo = `建行厦门科技支行${this.dataId}`
           const content = `<div style='cursor:pointer;' id=${this.dataId}>${this.contentInfo}</div>`
