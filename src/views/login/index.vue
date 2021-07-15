@@ -1,13 +1,6 @@
 <template>
-  <div class="login-container">
-    <el-form
-      ref="loginForm"
-      :model="loginForm"
-      :rules="loginRules"
-      class="login-form"
-      auto-complete="on"
-      label-position="left"
-    >
+  <div class="login-container" id="form-bg">
+    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
       <div class="title-container">
         <h3 class="title">vue-element-template</h3>
       </div>
@@ -43,19 +36,11 @@
           @keyup.enter.native="handleLogin"
         />
         <span class="show-pwd" @click="showPwd">
-          <i
-            class="iconfont"
-            :class="passwordType === 'password' ? 'xl-icon-eye-close' : 'xl-icon-open-eyes'"
-          />
+          <i class="iconfont" :class="passwordType === 'password' ? 'xl-icon-eye-close' : 'xl-icon-open-eyes'" />
         </span>
       </el-form-item>
 
-      <el-button
-        :loading="loading"
-        type="primary"
-        style="width:100%;margin-bottom:30px;"
-        @click.native.prevent="handleLogin"
-      >登录</el-button>
+      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">登录</el-button>
 
       <!-- <div class="tips">
         <span style="margin-right:20px;">username: admin</span>
@@ -95,12 +80,38 @@ export default {
         password: [{ required: true, trigger: 'blur', validator: validatePassword }]
       },
       loading: false,
-      passwordType: 'password'
+      passwordType: 'password',
+      clearRef: null
     }
+  },
+  mounted() {
+    this.loadModulesRandom()
   },
   computed: {},
   watch: {},
+  beforeDestroy() {
+    this.clearRef()
+  },
   methods: {
+    loadModulesRandom(idx) {
+      const random = idx || Math.ceil(Math.random() * 2)
+      switch (random) {
+        case 1:
+          import('./plugins/canvas01').then(({ drawCanvas, clearFunc }) => {
+            this.clearRef = clearFunc
+            drawCanvas('form-bg')
+          })
+          break
+        case 2:
+          import('./plugins/webgl04').then(({ drawCanvas, clearFunc }) => {
+            this.clearRef = clearFunc
+            drawCanvas('form-bg')
+          })
+          break
+        default:
+          break
+      }
+    },
     showPwd() {
       if (this.passwordType === 'password') {
         this.passwordType = ''
@@ -180,11 +191,13 @@ $light_gray: #eee;
 .login-container {
   min-height: 100%;
   width: 100%;
-  background-color: $bg;
   overflow: hidden;
 
   .login-form {
-    position: relative;
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 7;
     width: 520px;
     max-width: 100%;
     padding: 160px 35px 0;

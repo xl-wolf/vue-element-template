@@ -40,7 +40,7 @@ router.post("/user/register", (req, res) => {
 
 // 登录
 router.post("/user/login", (req, res) => {
-  console.log("req.body", req);
+  // console.log("req.body", req);
   const { username, password } = req.query;
   let resData = null;
   switch (username) {
