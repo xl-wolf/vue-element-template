@@ -7,8 +7,10 @@
 <script>
 import * as Three from 'three'
 import { mapGetters } from 'vuex'
+import mixins from '../mixins'
 export default {
   name: 'three01',
+  mixins: [mixins],
   computed: {
     ...mapGetters(['menuStatus'])
   },
@@ -19,7 +21,8 @@ export default {
       renderer: null,
       mesh: null,
       WIDTH: null,
-      HEIGHT: null
+      HEIGHT: null,
+      animationFrameRef: null
     }
   },
   mounted() {
@@ -33,7 +36,7 @@ export default {
     menuStatus: {
       deep: false,
       immediate: false,
-      handler: function(val, oldVal) {
+      handler: function (val, oldVal) {
         this.onWindowResize()
       }
     }
@@ -56,7 +59,8 @@ export default {
       container.appendChild(this.renderer.domElement)
     },
     animate() {
-      requestAnimationFrame(this.animate)
+      console.log('three01')
+      this.animationFrameRef = requestAnimationFrame(this.animate)
       this.mesh.rotation.x += 0.01
       this.mesh.rotation.y += 0.02
       this.renderer.render(this.scene, this.camera)
@@ -71,6 +75,9 @@ export default {
         this.renderer.setSize(this.WIDTH, this.HEIGHT)
       }
     }
+  },
+  beforeDestroy() {
+    this.releaseMemory(this.animationFrameRef)
   }
 }
 </script>

@@ -26,8 +26,10 @@ import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls
 import { CSS3DRenderer, CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer.js'
 import table from './elements.js'
 import { mapGetters } from 'vuex'
+import mixins from '../mixins'
 export default {
   name: 'three03',
+  mixins: [mixins],
   computed: {
     ...mapGetters(['menuStatus'])
   },
@@ -49,14 +51,15 @@ export default {
       button3: null,
       button4: null,
       idx: 0,
-      paused: false
+      paused: false,
+      animationFrameRef: null
     }
   },
   watch: {
     menuStatus: {
       deep: false,
       immediate: false,
-      handler: function(val, oldVal) {
+      handler: function (val, oldVal) {
         this.onWindowResize()
       }
     }
@@ -280,18 +283,12 @@ export default {
         const target = targets[i]
 
         new TWEEN.Tween(object.position)
-          .to(
-            { x: target.position.x, y: target.position.y, z: target.position.z },
-            Math.random() * duration + duration
-          )
+          .to({ x: target.position.x, y: target.position.y, z: target.position.z }, Math.random() * duration + duration)
           .easing(TWEEN.Easing.Exponential.InOut)
           .start()
 
         new TWEEN.Tween(object.rotation)
-          .to(
-            { x: target.rotation.x, y: target.rotation.y, z: target.rotation.z },
-            Math.random() * duration + duration
-          )
+          .to({ x: target.rotation.x, y: target.rotation.y, z: target.rotation.z }, Math.random() * duration + duration)
           .easing(TWEEN.Easing.Exponential.InOut)
           .start()
       }
@@ -312,7 +309,9 @@ export default {
       this.render()
     },
     animate() {
-      requestAnimationFrame(this.animate)
+      console.log('three03')
+
+      this.animationFrameRef = requestAnimationFrame(this.animate)
 
       TWEEN.update()
 
@@ -327,6 +326,9 @@ export default {
       })
       dom.className = 'active'
     }
+  },
+  beforeDestroy() {
+    this.releaseMemory(this.animationFrameRef)
   }
 }
 </script>

@@ -13,7 +13,6 @@ import {
   TreesGeometry,
   SkyGeometry
 } from 'three/examples/jsm/misc/RollerCoaster.js'
-import { VRButton } from 'three/examples/jsm/webxr/VRButton.js'
 import { mapGetters } from 'vuex'
 export default {
   name: 'threeVR',
@@ -42,7 +41,7 @@ export default {
     menuStatus: {
       deep: false,
       immediate: false,
-      handler: function(val, oldVal) {
+      handler: function (val, oldVal) {
         this.onWindowResize()
       }
     }
@@ -57,12 +56,11 @@ export default {
     this.renderer.xr.enabled = true
     this.renderer.xr.setReferenceSpaceType('local')
     VRcontainer.appendChild(this.renderer.domElement)
-    // VRcontainer.appendChild(VRButton.createButton(this.renderer))
 
     this.scene = new THREE.Scene()
     this.scene.background = new THREE.Color(0xf0f0ff)
 
-    let light = new THREE.HemisphereLight(0xfff0f0, 0x606066)
+    const light = new THREE.HemisphereLight(0xfff0f0, 0x606066)
     light.position.set(1, 1, 1)
     this.scene.add(light)
 
@@ -116,12 +114,12 @@ export default {
 
     const PI2 = Math.PI * 2
 
-    this.curve = (function() {
+    this.curve = (function () {
       const vector = new THREE.Vector3()
       const vector2 = new THREE.Vector3()
 
       return {
-        getPointAt: function(t) {
+        getPointAt: function (t) {
           t = t * PI2
 
           const x = Math.sin(t * 3) * Math.cos(t * 4) * 50
@@ -131,15 +129,12 @@ export default {
           return vector.set(x, y, z).multiplyScalar(2)
         },
 
-        getTangentAt: function(t) {
+        getTangentAt: function (t) {
           const delta = 0.0001
           const t1 = Math.max(0, t - delta)
           const t2 = Math.min(1, t + delta)
 
-          return vector2
-            .copy(this.getPointAt(t2))
-            .sub(this.getPointAt(t1))
-            .normalize()
+          return vector2.copy(this.getPointAt(t2)).sub(this.getPointAt(t1)).normalize()
         }
       }
     })()
