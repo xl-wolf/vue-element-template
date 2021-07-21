@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "body-parser": "^1.18.3",
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "ws": "^7.5.3"
   },
   "devDependencies": {
     "express": "^4.16.4",
