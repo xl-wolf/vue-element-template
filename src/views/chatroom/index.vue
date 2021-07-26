@@ -2,7 +2,7 @@
   <div class="app-main-container">
     <div class="chat-box">
       <header>聊天室人数：{{count}}</header>
-      <div class="msg-box" ref="msg-box">
+      <div class="msg-box" id="msg-box">
         <div v-for="(i,index) in list" :key="index" class="msg" :style="i.userId == userId?'flex-direction:row-reverse':''">
           <div class="user-head">
             <div
@@ -24,6 +24,7 @@
 </template>
  
 <script>
+import { scrollBottom } from '@/utils'
 export default {
   data() {
     return {
@@ -39,6 +40,9 @@ export default {
   },
   mounted() {
     this.initWebSocket()
+  },
+  beforeDestroy() {
+    this.ws.close()
   },
   methods: {
     //根据时间戳作为当前用户ID
@@ -60,9 +64,8 @@ export default {
       }
     },
     //滚动条到底部
-    scrollBottm() {
-      const el = this.$refs['msg-box']
-      el.scrollTop = el.scrollHeight
+    scrollBottom() {
+      scrollBottom('msg-box')
     },
     //发送聊天信息
     sendText() {
@@ -77,9 +80,7 @@ export default {
       }
       _this.ws.send(JSON.stringify(params)) //调用WebSocket send()发送信息的方法
       _this.contentText = ''
-      setTimeout(() => {
-        _this.scrollBottm()
-      }, 500)
+      _this.scrollBottom()
     },
     //进入页面创建websocket连接
     initWebSocket() {
@@ -91,6 +92,7 @@ export default {
         _this.ws = ws
         ws.onopen = function (e) {
           console.log('服务器连接成功')
+          _this.scrollBottom()
         }
         ws.onclose = function (e) {
           console.log('服务器连接关闭')

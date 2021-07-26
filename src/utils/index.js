@@ -59,3 +59,13 @@ export const requireContentArray = (r, exinclude) => {
   }
   return contents
 };
+// 容器滚动到底部
+export const scrollBottom = (domId, speed = 5) => {
+  const el = document.getElementById(domId)
+  if (!el) throw new Error('请确保传入正确的domId')
+  const timer = setInterval(() => {
+    if (el.scrollHeight - el.scrollTop === el.clientHeight) return clearInterval(timer)
+    speed += speed
+    el.scrollTop += speed
+  }, 30)
+}

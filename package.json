@@ -6,7 +6,8 @@
     "inspect": "vue-cli-service inspect --rule css",
     "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "server": "cd ./server && npm i && node main && node socket"
+    "server": "cd ./server && npm i && node main",
+    "socket": "cd ./server && npm i && node socket"
   },
   "dependencies": {
     "axios": "0.18.1",
