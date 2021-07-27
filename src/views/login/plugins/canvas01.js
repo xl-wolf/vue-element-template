@@ -146,7 +146,6 @@ export const drawCanvas = (domId) => {
   canvas.width = document.getElementById(domId).offsetWidth
   canvas.height = document.getElementById(domId).offsetHeight
   document.getElementById(domId).appendChild(canvas);
-  console.log(document.getElementById(domId).offsetWidth, document.getElementById(domId).offsetHeight, 7777)
   initPoints(POINT_NUM);
   drawFrame(domId);
 };

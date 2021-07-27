@@ -13,16 +13,18 @@ let particles,
 let mouseX = 0,
   mouseY = 0;
 
-let windowHalfX = window.innerWidth / 2;
-let windowHalfY = window.innerHeight / 2;
+let windowHalfX;
+let windowHalfY;
 function init(domId) {
   container = document.createElement("div");
   const dom = document.getElementById(domId);
+  windowHalfX = dom.offsetWidth / 2
+  windowHalfY = dom.offsetHeight / 2;
   dom.appendChild(container);
 
   camera = new THREE.PerspectiveCamera(
     75,
-    window.innerWidth / window.innerHeight,
+    dom.offsetWidth / dom.offsetHeight,
     1,
     10000
   );
@@ -82,7 +84,7 @@ function init(domId) {
 
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setSize(dom.offsetWidth, dom.offsetHeight);
   container.appendChild(renderer.domElement);
 
   container.style.touchAction = "none";
@@ -90,17 +92,17 @@ function init(domId) {
 
   //
 
-  window.addEventListener("resize", onWindowResize);
+  window.addEventListener("resize", onWindowResize.bind(null, dom));
 }
 
-function onWindowResize() {
-  windowHalfX = window.innerWidth / 2;
-  windowHalfY = window.innerHeight / 2;
+function onWindowResize(dom) {
+  windowHalfX = dom.offsetWidth / 2;
+  windowHalfY = dom.offsetHeight / 2;
 
-  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.aspect = dom.offsetWidth / dom.offsetHeight;
   camera.updateProjectionMatrix();
 
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setSize(dom.offsetWidth, dom.offsetHeight);
 }
 //
 function onPointerMove(event) {
