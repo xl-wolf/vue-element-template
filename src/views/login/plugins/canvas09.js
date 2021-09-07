@@ -1,26 +1,26 @@
 
-let pi;
-let ctx;
-let cx;
-let cy;
-let playerZ;
-let playerX;
-let playerY;
-let pitch;
-let yaw;
-let scale;
-let seedTimer;
-let seedInterval;
-let seedLife;
-let gravity;
-let seeds;
-let sparkPics
-let s
-let sparks
-let frames
+var pi;
+var ctx;
+var cx;
+var cy;
+var playerZ;
+var playerX;
+var playerY;
+var pitch;
+var yaw;
+var scale;
+var seedTimer;
+var seedInterval;
+var seedLife;
+var gravity;
+var seeds;
+var sparkPics
+var s
+var sparks
+var frames
 
 // 创建背景画布
-const canvas = document.createElement("canvas");
+var canvas = document.createElement("canvas");
 function initVars(domId) {
     pi = Math.PI
     ctx = canvas.getContext("2d")
@@ -37,17 +37,13 @@ function initVars(domId) {
     seeds = new Array()
     sparkPics = new Array()
     s = "https://cantelope.org/NYE/"
-    for (let i = 1; i <= 10; ++i) {
-        const sparkPic = new Image()
+    for (var i = 1; i <= 10; ++i) {
+        var sparkPic = new Image()
         sparkPic.src = s + "spark" + i + ".png"
         sparkPics.push(sparkPic)
     }
-    sparks = new Array(),
-        // pow1 = new Audio(s + "pow1.ogg"),
-        // pow2 = new Audio(s + "pow2.ogg"),
-        // pow3 = new Audio(s + "pow3.ogg"),
-        // pow4 = new Audio(s + "pow4.ogg"),
-        frames = 0
+    sparks = new Array()
+    frames = 0
 }
 
 function rasterizePoint(x, y, z) {
@@ -92,7 +88,7 @@ function rasterizePoint(x, y, z) {
 }
 
 function spawnSeed() {
-    const seed = new Object()
+    var seed = new Object()
     seed.x = -50 + Math.random() * 100
     seed.y = 25
     seed.z = -50 + Math.random() * 100
@@ -104,13 +100,13 @@ function spawnSeed() {
 }
 
 function splode(x, y, z) {
-    let t = 5 + parseInt(Math.random() * 150)
-    let sparkV = 1 + Math.random() * 2.5
-    let type = parseInt(Math.random() * 3)
-    let pic1
-    let pic2
-    let pic3
-    let pow
+    var t = 5 + parseInt(Math.random() * 150)
+    var sparkV = 1 + Math.random() * 2.5
+    var type = parseInt(Math.random() * 3)
+    var pic1
+    var pic2
+    var pic3
+    var pow
     switch (type) {
         case 0:
             pic1 = parseInt(Math.random() * 10)
@@ -131,14 +127,14 @@ function splode(x, y, z) {
             } while (pic3 == pic1 || pic3 == pic2)
             break
     }
-    for (let m = 1; m < t; ++m) {
-        const spark = new Object()
+    for (var m = 1; m < t; ++m) {
+        var spark = new Object()
         spark.x = x
         spark.y = y
         spark.z = z
-        const p1 = pi * 2 * Math.random()
-        const p2 = pi * Math.random()
-        const v = sparkV * (1 + Math.random() / 6)
+        var p1 = pi * 2 * Math.random()
+        var p2 = pi * Math.random()
+        var v = sparkV * (1 + Math.random() / 6)
         spark.vx = Math.sin(p1) * Math.sin(p2) * v
         spark.vz = Math.cos(p1) * Math.sin(p2) * v
         spark.vy = Math.cos(p2) * v
@@ -182,7 +178,7 @@ function splode(x, y, z) {
             pow = new Audio(s + "pow4.ogg")
             break
     }
-    const d = Math.sqrt((x - playerX) * (x - playerX) + (y - playerY) * (y - playerY) + (z - playerZ) * (z - playerZ))
+    var d = Math.sqrt((x - playerX) * (x - playerX) + (y - playerY) * (y - playerY) + (z - playerZ) * (z - playerZ))
     pow.volume = 1.5 / (1 + d / 10)
     try { pow.play() } catch (err) { console.log(err) }
 }
@@ -192,7 +188,7 @@ function doLogic() {
         seedTimer = frames + seedInterval * Math.random() * 10
         spawnSeed()
     }
-    for (let i = 0; i < seeds.length; ++i) {
+    for (var i = 0; i < seeds.length; ++i) {
         seeds[i].vy += gravity
         seeds[i].x += seeds[i].vx
         seeds[i].y += seeds[i].vy
@@ -202,20 +198,20 @@ function doLogic() {
             seeds.splice(i, 1)
         }
     }
-    for (let i = 0; i < sparks.length; ++i) {
+    for (var i = 0; i < sparks.length; ++i) {
         if (sparks[i].alpha > 0 && sparks[i].radius > 5) {
             sparks[i].alpha -= 0.01
             sparks[i].radius /= 1.02
             sparks[i].vy += gravity
-            const point = new Object()
+            var point = new Object()
             point.x = sparks[i].x
             point.y = sparks[i].y
             point.z = sparks[i].z
             if (sparks[i].trail.length) {
-                const x = sparks[i].trail[sparks[i].trail.length - 1].x
-                const y = sparks[i].trail[sparks[i].trail.length - 1].y
-                const z = sparks[i].trail[sparks[i].trail.length - 1].z
-                const d = (point.x - x) * (point.x - x) + (point.y - y) * (point.y - y) + (point.z - z) * (point.z - z)
+                var x = sparks[i].trail[sparks[i].trail.length - 1].x
+                var y = sparks[i].trail[sparks[i].trail.length - 1].y
+                var z = sparks[i].trail[sparks[i].trail.length - 1].z
+                var d = (point.x - x) * (point.x - x) + (point.y - y) * (point.y - y) + (point.z - z) * (point.z - z)
                 if (d > 9) {
                     sparks[i].trail.push(point)
                 }
@@ -233,10 +229,10 @@ function doLogic() {
             sparks.splice(i, 1)
         }
     }
-    let p = Math.atan2(playerX, playerZ)
-    let d = Math.sqrt(playerX * playerX + playerZ * playerZ)
+    var p = Math.atan2(playerX, playerZ)
+    var d = Math.sqrt(playerX * playerX + playerZ * playerZ)
     d += Math.sin(frames / 80) / 1.25
-    let t = Math.sin(frames / 200) / 40
+    var t = Math.sin(frames / 200) / 40
     playerX = Math.sin(p + t) * d
     playerZ = Math.cos(p + t) * d
     yaw = pi + p + t
@@ -245,17 +241,17 @@ function doLogic() {
 function draw() {
     ctx.clearRect(0, 0, cx * 2, cy * 2)
 
-    ctx.fillStyle = "#ff8"
-    for (let i = -100; i < 100; i += 3) {
-        for (let j = -100; j < 100; j += 4) {
-            let x = i
-            let z = j
-            let y = 25
-            let point = rasterizePoint(x, y, z)
+    ctx.fillStyle = "#0ff"
+    for (var i = -100; i < 100; i += 3) {
+        for (var j = -100; j < 100; j += 4) {
+            var x = i
+            var z = j
+            var y = 25
+            var point = rasterizePoint(x, y, z)
             if (point.d != -1) {
-                let size = 250 / (1 + point.d)
-                let d = Math.sqrt(x * x + z * z)
-                let a = 0.75 - Math.pow(d / 100, 6) * 0.75
+                var size = 250 / (1 + point.d)
+                var d = Math.sqrt(x * x + z * z)
+                var a = 0.75 - Math.pow(d / 100, 6) * 0.75
                 if (a > 0) {
                     ctx.globalAlpha = a
                     ctx.fillRect(point.x - size / 2, point.y - size / 2, size, size)
@@ -264,18 +260,18 @@ function draw() {
         }
     }
     ctx.globalAlpha = 1
-    for (let i = 0; i < seeds.length; ++i) {
-        let point = rasterizePoint(seeds[i].x, seeds[i].y, seeds[i].z)
+    for (var i = 0; i < seeds.length; ++i) {
+        var point = rasterizePoint(seeds[i].x, seeds[i].y, seeds[i].z)
         if (point.d != -1) {
-            let size = 200 / (1 + point.d)
+            var size = 200 / (1 + point.d)
             ctx.fillRect(point.x - size / 2, point.y - size / 2, size, size)
         }
     }
-    let point1 = new Object()
-    for (let i = 0; i < sparks.length; ++i) {
-        let point = rasterizePoint(sparks[i].x, sparks[i].y, sparks[i].z)
+    var point1 = new Object()
+    for (var i = 0; i < sparks.length; ++i) {
+        var point = rasterizePoint(sparks[i].x, sparks[i].y, sparks[i].z)
         if (point.d != -1) {
-            let size = (sparks[i].radius * 200) / (1 + point.d)
+            var size = (sparks[i].radius * 200) / (1 + point.d)
             if (sparks[i].alpha < 0) sparks[i].alpha = 0
             if (sparks[i].trail.length) {
                 point1.x = point.x
@@ -312,8 +308,8 @@ function draw() {
                         ctx.strokeStyle = "#44f"
                         break
                 }
-                for (let j = sparks[i].trail.length - 1; j >= 0; --j) {
-                    let point2 = rasterizePoint(sparks[i].trail[j].x, sparks[i].trail[j].y, sparks[i].trail[j].z)
+                for (var j = sparks[i].trail.length - 1; j >= 0; --j) {
+                    var point2 = rasterizePoint(sparks[i].trail[j].x, sparks[i].trail[j].y, sparks[i].trail[j].z)
                     if (point2.d != -1) {
                         ctx.globalAlpha = ((j / sparks[i].trail.length) * sparks[i].alpha) / 2
                         ctx.beginPath()
@@ -331,7 +327,8 @@ function draw() {
         }
     }
 }
-let animationFrameId = null;
+
+var animationFrameId = null;
 function frame() {
     console.log('canvas09')
     if (frames > 100000) {
@@ -346,8 +343,8 @@ function frame() {
 
 
 
-let dom
-export const drawCanvas = (domId) => {
+var dom
+export function drawCanvas(domId) {
     dom = document.getElementById(domId);
     dom.appendChild(canvas);
     dom.style.backgroundColor = "#000";
@@ -355,7 +352,7 @@ export const drawCanvas = (domId) => {
     frame()
     window.addEventListener("resize", resizeFunc)
 };
-export const clearFunc = () => {
+export function clearFunc() {
     animationFrameId && cancelAnimationFrame(animationFrameId);
     window.removeEventListener("resize", resizeFunc)
     console.log('animationFrameId', animationFrameId)
