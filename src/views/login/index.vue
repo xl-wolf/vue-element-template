@@ -1,5 +1,6 @@
 <template>
     <div class="login-container" id="form-bg">
+        <div class="bg-changer" @click="changeBG">点击切换背景</div>
         <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
             <div class="title-container">
                 <h3 class="title">vue-element-template</h3>
@@ -81,7 +82,8 @@ export default {
             },
             loading: false,
             passwordType: 'password',
-            clearRef: null
+            clearRef: null,
+            curBgIndex: 0
         }
     },
     mounted() {
@@ -93,7 +95,19 @@ export default {
         this.clearRef()
     },
     methods: {
+        changeBG() {
+            this.removeLastChild()
+            this.curBgIndex = this.curBgIndex === 3 ? 1 : ++this.curBgIndex
+            this.clearRef()
+            this.loadModulesRandom(this.curBgIndex)
+        },
+        removeLastChild() {
+            const DOM = document.getElementById('form-bg')
+            const children = DOM.children
+            DOM.removeChild(children[children.length - 1])
+        },
         loadModulesRandom(idx) {
+            console.log(77)
             const random = idx || Math.ceil(Math.random() * 3)
             switch (random) {
                 case 1:
@@ -251,6 +265,17 @@ $light_gray: #eee;
         color: $dark_gray;
         cursor: pointer;
         user-select: none;
+    }
+
+    .bg-changer {
+        color: #fff;
+        position: fixed;
+        z-index: 2;
+        right: 0;
+        top: 0;
+        padding: 20px 30px;
+        background: transparent;
+        cursor: pointer;
     }
 }
 </style>
