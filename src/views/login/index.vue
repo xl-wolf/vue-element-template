@@ -1,12 +1,18 @@
 <template>
     <div class="login-container" id="form-bg">
         <div class="bg-changer" @click="changeBG">点击切换背景</div>
+        <!-- <svg class="bg-changer-svg-text">
+            <text x="100%" y="75%" @click="changeBG">点击切换背景</text>
+        </svg>-->
         <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
             <div class="title-container">
-                <h3 class="title">vue-element-template</h3>
+                <svg class="admin-title-svg-text">
+                    <text x="50%" y="75%" @click="changeBG">vue-element-template</text>
+                </svg>
+                <!-- <h3 class="title">vue-element-template</h3> -->
             </div>
 
-            <el-form-item prop="username">
+            <el-form-item prop="username" class="miaobian">
                 <span class="icon-container">
                     <i class="iconfont xl-icon-user" />
                 </span>
@@ -21,7 +27,7 @@
                 />
             </el-form-item>
 
-            <el-form-item prop="password">
+            <el-form-item prop="password" class="miaobian">
                 <span class="icon-container">
                     <i class="iconfont xl-icon-password" />
                 </span>
@@ -41,12 +47,7 @@
                 </span>
             </el-form-item>
 
-            <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">登录</el-button>
-
-            <!-- <div class="tips">
-        <span style="margin-right:20px;">username: admin</span>
-        <span>password: any</span>
-            </div>-->
+            <el-button :loading="loading" size="large" type="primary" class="miaobian-btn" @click.native.prevent="handleLogin">登录</el-button>
         </el-form>
     </div>
 </template>
@@ -257,18 +258,32 @@ $light_gray: #eee;
         }
     }
 
-    .show-pwd {
-        position: absolute;
-        right: 10px;
-        top: 7px;
-        font-size: 16px;
-        color: $dark_gray;
-        cursor: pointer;
-        user-select: none;
+    .miaobian {
+        color: #69ca62;
+        box-shadow: inset 0 0 0 1px rgb(105, 202, 196);
+    }
+
+    .miaobian-btn {
+        width: 99%;
+        position: relative;
+        margin-bottom: 30px;
+        &::before {
+            box-shadow: inset 0 0 0 2px #69cac4;
+            border-radius: 8px;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            content: '';
+            z-index: -1;
+            margin: -2px;
+            animation: clipMe 1s ease-in-out infinite;
+        }
     }
 
     .bg-changer {
-        color: #fff;
+        font-size: 18px;
         position: fixed;
         z-index: 2;
         right: 0;
@@ -276,6 +291,89 @@ $light_gray: #eee;
         padding: 20px 30px;
         background: transparent;
         cursor: pointer;
+        text-shadow: 0 0 5px #ffa500, 0 0 15px #ffa500, 0 0 20px #ffa500, 0 0 40px #ffa500, 0 0 60px #ff0000, 0 0 10px #ff8d00,
+            0 0 98px #ff0000;
+        color: #fff6a9;
+        font-family: 'Sacramento', cursive;
+        text-align: center;
+        animation: blink 12s infinite;
+    }
+
+    .admin-title-svg-text {
+        width: 100%;
+        font-size: 36px;
+        text {
+            text-anchor: middle;
+            stroke: rgb(120, 243, 243);
+            stroke-width: 1;
+            animation: textAnimate 5s infinite;
+        }
+    }
+
+    .bg-changer-svg-text {
+        width: 100%;
+        height: 40px;
+        padding-right: 30px;
+        font-size: 20px;
+        position: fixed;
+        z-index: 2;
+        right: 0;
+        top: 0;
+        text {
+            text-anchor: end;
+            cursor: pointer;
+            stroke: #ffa500;
+            stroke-width: 1;
+            animation: textAnimate 5s infinite alternate;
+        }
+    }
+}
+@keyframes blink {
+    20%,
+    24%,
+    55% {
+        color: #111;
+        text-shadow: none;
+    }
+    0%,
+    19%,
+    21%,
+    23%,
+    25%,
+    54%,
+    56%,
+    100% {
+        text-shadow: 0 0 5px #ffa500, 0 0 15px #ffa500, 0 0 20px #ffa500, 0 0 40px #ffa500, 0 0 60px #ff0000, 0 0 10px #ff8d00,
+            0 0 98px #ff0000;
+        color: #fff6a9;
+    }
+}
+@keyframes textAnimate {
+    0% {
+        stroke-dasharray: 0 50%;
+        stroke-dashoffset: 20%;
+        fill: hsl(189, 68%, 75%);
+    }
+    100% {
+        stroke-dasharray: 50% 0;
+        stroke-dashoffstet: -20%;
+        fill: rgba(255, 255, 255, 0.1);
+    }
+}
+@keyframes clipMe {
+    0%,
+    100% {
+        clip: rect(0px, 225px, 23px, 0px);
+    }
+    25% {
+        clip: rect(23px, 225px, 45px, 0px);
+    }
+
+    50% {
+        clip: rect(23px, 450px, 45px, 225px);
+    }
+    75% {
+        clip: rect(0px, 450px, 23px, 225px);
     }
 }
 </style>
