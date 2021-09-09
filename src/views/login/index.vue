@@ -1,18 +1,9 @@
 <template>
     <div class="login-container" id="form-bg">
-        <div class="bg-changer" @click="changeBG">点击切换背景</div>
-        <!-- <svg class="bg-changer-svg-text">
-            <text x="100%" y="75%" @click="changeBG">点击切换背景</text>
-        </svg>-->
+        <MagicBgChanger class="bg-changer-position" @click="changeBG" />
         <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
-            <div class="title-container">
-                <svg class="admin-title-svg-text">
-                    <text x="50%" y="75%" @click="changeBG">vue-element-template</text>
-                </svg>
-                <!-- <h3 class="title">vue-element-template</h3> -->
-            </div>
-
-            <el-form-item prop="username" class="miaobian">
+            <MagicTitle x="50%" y="75%" />
+            <el-form-item prop="username" class="input-box-shadow">
                 <span class="icon-container">
                     <i class="iconfont xl-icon-user" />
                 </span>
@@ -27,7 +18,7 @@
                 />
             </el-form-item>
 
-            <el-form-item prop="password" class="miaobian">
+            <el-form-item prop="password" class="input-box-shadow">
                 <span class="icon-container">
                     <i class="iconfont xl-icon-password" />
                 </span>
@@ -42,12 +33,9 @@
                     auto-complete="on"
                     @keyup.enter.native="handleLogin"
                 />
-                <span class="show-pwd" @click="showPwd">
-                    <i class="iconfont" :class="passwordType === 'password' ? 'xl-icon-eye-close' : 'xl-icon-open-eyes'" />
-                </span>
+                <i @click="showPwd" class="iconfont" :class="passwordType === 'password' ? 'xl-icon-eye-close' : 'xl-icon-open-eyes'" />
             </el-form-item>
-
-            <el-button :loading="loading" size="large" type="primary" class="miaobian-btn" @click.native.prevent="handleLogin">登录</el-button>
+            <MagicButton @click="handleLogin" />
         </el-form>
     </div>
 </template>
@@ -57,6 +45,11 @@ import { validUsername } from '@/utils/validate'
 
 export default {
     name: 'Login',
+    components: {
+        MagicBgChanger: () => import('@/components/MagicBgChanger/index'),
+        MagicTitle: () => import('@/components/MagicTitle/index'),
+        MagicButton: () => import('@/components/MagicButton/index')
+    },
     data() {
         const validateUsername = (rule, value, callback) => {
             if (!validUsername(value)) {
@@ -108,7 +101,6 @@ export default {
             DOM.removeChild(children[children.length - 1])
         },
         loadModulesRandom(idx) {
-            console.log(77)
             const random = idx || Math.ceil(Math.random() * 3)
             switch (random) {
                 case 1:
@@ -134,11 +126,7 @@ export default {
             }
         },
         showPwd() {
-            if (this.passwordType === 'password') {
-                this.passwordType = ''
-            } else {
-                this.passwordType = 'password'
-            }
+            this.passwordType = this.passwordType === 'password' ? '' : 'password'
             this.$nextTick(() => {
                 this.$refs.password.focus()
             })
@@ -167,8 +155,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '@/styles/variables.scss';
 $bg: #283443;
-$light_gray: #fff;
 $cursor: #fff;
 
 /* reset element-ui css */
@@ -184,7 +172,7 @@ $cursor: #fff;
             -webkit-appearance: none;
             border-radius: 0px;
             padding: 12px 5px 12px 15px;
-            color: $light_gray;
+            color: $primary-color;
             height: 47px;
             caret-color: $cursor;
 
@@ -205,15 +193,18 @@ $cursor: #fff;
 </style>
 
 <style lang="scss" scoped>
-$bg: #2d3a4b;
-$dark_gray: #889aa4;
-$light_gray: #eee;
+@import '@/styles/variables.scss';
 
 .login-container {
     min-height: 100%;
     width: 100%;
     overflow: hidden;
-
+    .bg-changer-position {
+        z-index: 2;
+        position: fixed;
+        right: 0;
+        top: 0;
+    }
     .login-form {
         position: absolute;
         left: 0;
@@ -226,154 +217,17 @@ $light_gray: #eee;
         overflow: hidden;
     }
 
-    .tips {
-        font-size: 14px;
-        color: #fff;
-        margin-bottom: 10px;
-
-        span {
-            &:first-of-type {
-                margin-right: 16px;
-            }
-        }
-    }
-
     .icon-container {
         padding: 6px 5px 6px 15px;
-        color: $dark_gray;
+        color: $primary-color;
         vertical-align: middle;
         width: 30px;
         display: inline-block;
     }
 
-    .title-container {
-        position: relative;
-
-        .title {
-            font-size: 26px;
-            color: $light_gray;
-            margin: 0px auto 40px auto;
-            text-align: center;
-            font-weight: bold;
-        }
-    }
-
-    .miaobian {
-        color: #69ca62;
+    .input-box-shadow {
         box-shadow: inset 0 0 0 1px rgb(105, 202, 196);
-    }
-
-    .miaobian-btn {
-        width: 99%;
-        position: relative;
-        margin-bottom: 30px;
-        &::before {
-            box-shadow: inset 0 0 0 2px #69cac4;
-            border-radius: 8px;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            content: '';
-            z-index: -1;
-            margin: -2px;
-            animation: clipMe 1s ease-in-out infinite;
-        }
-    }
-
-    .bg-changer {
-        font-size: 18px;
-        position: fixed;
-        z-index: 2;
-        right: 0;
-        top: 0;
-        padding: 20px 30px;
-        background: transparent;
-        cursor: pointer;
-        text-shadow: 0 0 5px #ffa500, 0 0 15px #ffa500, 0 0 20px #ffa500, 0 0 40px #ffa500, 0 0 60px #ff0000, 0 0 10px #ff8d00,
-            0 0 98px #ff0000;
-        color: #fff6a9;
-        font-family: 'Sacramento', cursive;
-        text-align: center;
-        animation: blink 12s infinite;
-    }
-
-    .admin-title-svg-text {
-        width: 100%;
-        font-size: 36px;
-        text {
-            text-anchor: middle;
-            stroke: rgb(120, 243, 243);
-            stroke-width: 1;
-            animation: textAnimate 5s infinite;
-        }
-    }
-
-    .bg-changer-svg-text {
-        width: 100%;
-        height: 40px;
-        padding-right: 30px;
-        font-size: 20px;
-        position: fixed;
-        z-index: 2;
-        right: 0;
-        top: 0;
-        text {
-            text-anchor: end;
-            cursor: pointer;
-            stroke: #ffa500;
-            stroke-width: 1;
-            animation: textAnimate 5s infinite alternate;
-        }
-    }
-}
-@keyframes blink {
-    20%,
-    24%,
-    55% {
-        color: #111;
-        text-shadow: none;
-    }
-    0%,
-    19%,
-    21%,
-    23%,
-    25%,
-    54%,
-    56%,
-    100% {
-        text-shadow: 0 0 5px #ffa500, 0 0 15px #ffa500, 0 0 20px #ffa500, 0 0 40px #ffa500, 0 0 60px #ff0000, 0 0 10px #ff8d00,
-            0 0 98px #ff0000;
-        color: #fff6a9;
-    }
-}
-@keyframes textAnimate {
-    0% {
-        stroke-dasharray: 0 50%;
-        stroke-dashoffset: 20%;
-        fill: hsl(189, 68%, 75%);
-    }
-    100% {
-        stroke-dasharray: 50% 0;
-        stroke-dashoffstet: -20%;
-        fill: rgba(255, 255, 255, 0.1);
-    }
-}
-@keyframes clipMe {
-    0%,
-    100% {
-        clip: rect(0px, 225px, 23px, 0px);
-    }
-    25% {
-        clip: rect(23px, 225px, 45px, 0px);
-    }
-
-    50% {
-        clip: rect(23px, 450px, 45px, 225px);
-    }
-    75% {
-        clip: rect(0px, 450px, 23px, 225px);
+        color: $primary-color;
     }
 }
 </style>
