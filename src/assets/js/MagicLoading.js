@@ -15,8 +15,9 @@ let M = Math,
 
 ctx.translate(cx, cy)
 const defaultFillStyles = ["hsl(200, 70%, 50%)", "hsl(200, 70%, 50%)", "hsl(200, 70%, 50%)", "hsl(200, 70%, 50%)"]
+let animationId = null
 const loop = (fillStyles = defaultFillStyles) => {
-	requestAnimationFrame(loop.bind(null, fillStyles))
+	animationId = requestAnimationFrame(loop.bind(null, fillStyles))
 	ctx.clearRect(-width / 2, -height / 2, width, height)
 	ctx.fillStyle = "#fff"
 	let angle = tick / 8,
@@ -137,12 +138,9 @@ export const showLoading = function(containerDom, fillStyles, positionStyleText,
 		throw error
 	}
 }
-
-export const hideLoading = function(containerDom) {
-	try {
-		setHidden()
-		setMaskPosition("top:100%")
-	} catch (error) {
-		throw error
-	}
+const clearAnimationFrame = () => animationId && cancelAnimationFrame(animationId)
+export const hideLoading = function() {
+	setHidden()
+	clearAnimationFrame()
+	setMaskPosition("top:100%")
 }
