@@ -51,37 +51,54 @@ const loop = (fillStyles = defaultFillStyles) => {
 	tick++
 }
 
-const defaultPosi = "\
-	position:fixed;\
-	top:0;\
-	right:0;\
-	bottom:0;\
-	left:0;\
-	z-index:99;\
-	margin:auto;\
-	opacity:0.7;\
-"
+const defaultPosi = `
+	position:fixed;
+	top:0;
+	right:0;
+	bottom:0;
+	left:0;
+	z-index:99;
+	margin:auto;
+	`
+// canvas位置设置
 const setPosition = (positionStyleText = defaultPosi) => {
 	canvas.style.cssText = positionStyleText
 }
+// canvas的可见性设置
+const setVisible = () => {
+	canvas.style.cssText += `opacity:0.7;visibility:visible;`
+}
+// 隐藏canvas
+const setHidden = () => {
+	canvas.style.cssText += `visibility:hidden;`
+}
 
-let maskDom = document.createElement("div")
-let defaultMaskStyle = "\
-	position:fixed;\
-	top:0;\
-	background:rgba(0,0,0,0.5);\
-	height:100%;\
-	width:100%;\
-	z-index:99;\
-"
-const setMask = (containerDom, maskStyle = defaultMaskStyle) => {
+const maskDom = document.createElement("div")
+const defaultMaskPosition = `
+	position:fixed;
+	top:0;
+	height:100%;
+	width:100%;
+	z-index:99;
+`
+const setMaskPosition = (maskStyle = defaultMaskPosition) => {
 	maskDom.style.cssText = maskStyle
+}
+const defaultMaskBgColor = `background:rgba(0,0,0,0.5)`
+const setMaskBgColor = (maskStyle = defaultMaskBgColor) => {
+	maskDom.style.cssText += maskStyle
+}
+const setMask = (containerDom) => {
+	setMaskPosition()
+	setMaskBgColor()
 	containerDom.appendChild(maskDom)
 }
 
 const removeMask = (containerDom) => {
 	containerDom.removeChild(maskDom)
 }
+
+// 第一套loading方案，灵活性好，不过dom操作过于频繁，性能不够友好
 /**
  *
  * @param {loading的容器} containerDom
@@ -99,10 +116,32 @@ export const mountLoading = function(containerDom, fillStyles, positionStyleText
 		throw error
 	}
 }
+
 export const destroyLoading = function(containerDom) {
 	try {
 		containerDom.removeChild(canvas)
 		maskDom && removeMask(containerDom)
+	} catch (error) {
+		throw error
+	}
+}
+// 第二套loading方案，性能友好，不过灵活性不如第一种
+export const showLoading = function(containerDom, fillStyles, positionStyleText, isMasked = true) {
+	loop(fillStyles)
+	setPosition(positionStyleText)
+	setVisible()
+	isMasked && setMask(containerDom)
+	try {
+		containerDom.appendChild(canvas)
+	} catch (error) {
+		throw error
+	}
+}
+
+export const hideLoading = function(containerDom) {
+	try {
+		setHidden()
+		setMaskPosition("top:100%")
 	} catch (error) {
 		throw error
 	}

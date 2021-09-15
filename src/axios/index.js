@@ -1,11 +1,9 @@
 import axios from "axios"
 import { primaryColor } from '@/styles/variables.scss'
 import {
-	// Loading,
 	Message,
 } from "element-ui"
-import { mountLoading, destroyLoading } from "@/assets/js/MagicLoading.js"
-// let loading = null;
+import { mountLoading, destroyLoading,showLoading,hideLoading } from "@/assets/js/MagicLoading.js"
 const baseURL = process.env === "development" ? "http://localhost:6067" : "http://localhost:6067"
 // const baseURL =
 //   process.env === "development"
@@ -17,18 +15,12 @@ const service = axios.create({
 	// withCredentials: true, // send cookies when cross-domain requests
 	timeout: 20000, // request timeout
 })
-
+const loadingContainer = document.body
 // request interceptor
 service.interceptors.request.use(
 	(config) => {
-		// loading = Loading.service({
-		//   lock: true, // 是否锁屏
-		//   text: "拼命加载中...", // 加载动画的文字
-		//   // spinner: 'el-icon-loading',             // 引入的loading图标
-		//   background: "rgba(0, 0, 0, 0.3)", // 背景颜色
-		//   body: true,
-		// });
-		mountLoading(document.body,[primaryColor,primaryColor,primaryColor,primaryColor])
+		// mountLoading(loadingContainer,[primaryColor,primaryColor,primaryColor,primaryColor])
+		showLoading(loadingContainer,[primaryColor,primaryColor,primaryColor,primaryColor])
 		return config
 	},
 	(error) => {
@@ -41,8 +33,8 @@ service.interceptors.request.use(
 // response interceptor
 service.interceptors.response.use(
 	(response) => {
-		// loading.close();
-		destroyLoading(document.body)
+		// destroyLoading(loadingContainer)
+		hideLoading(loadingContainer)
 		const { data } = response
 		return data
 	},
@@ -53,8 +45,8 @@ service.interceptors.response.use(
 			type: "error",
 			duration: 5 * 1000,
 		})
-		// loading.close()
-    // destroyLoading(document.body)
+    // destroyLoading(loadingContainer)
+    hideLoading(loadingContainer)
 		return Promise.reject(error)
 	}
 )
