@@ -99,7 +99,7 @@ const removeMask = (containerDom) => {
 	containerDom.removeChild(maskDom)
 }
 
-// 第一套loading方案，灵活性好，不过dom操作过于频繁，性能不够友好
+// 第一套loading方案，dom树干净，不过dom操作过于频繁，性能不够友好
 /**
  *
  * @param {loading的容器} containerDom
@@ -126,7 +126,7 @@ export const destroyLoading = function(containerDom) {
 		throw error
 	}
 }
-// 第二套loading方案，性能友好，不过灵活性不如第一种
+// 第二套loading方案，性能友好，不过dom树上会挂上过多的dom节点
 export const showLoading = function(containerDom, fillStyles, positionStyleText, isMasked = true) {
 	loop(fillStyles)
 	setPosition(positionStyleText)
@@ -142,5 +142,5 @@ const clearAnimationFrame = () => animationId && cancelAnimationFrame(animationI
 export const hideLoading = function() {
 	setHidden()
 	clearAnimationFrame()
-	setMaskPosition("top:100%")
+	setMaskPosition("")
 }
