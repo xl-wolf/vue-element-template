@@ -1,35 +1,35 @@
 export const drawCanvas = (domId) => {
-	console.log('canvas07')
-	const dom = document.getElementById(domId);
-	dom.appendChild(canvas);
-	dom.style.backgroundColor = "#000";
-	draw();
-};
+	console.log("canvas07")
+	const dom = document.getElementById(domId)
+	dom.appendChild(canvas)
+	dom.style.backgroundColor = "#000"
+	draw()
+}
 export const clearFunc = () => {
-	animationFrameId && cancelAnimationFrame(animationFrameId);
-	console.log('animationFrameId', animationFrameId)
-};
-var canvas = document.createElement("canvas");
+	animationFrameId && cancelAnimationFrame(animationFrameId)
+	console.log("animationFrameId", animationFrameId)
+}
+var canvas = document.createElement("canvas")
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.width = window.innerWidth
+canvas.height = window.innerHeight
 
 // Initialize the GL context
-var gl = canvas.getContext("webgl");
+var gl = canvas.getContext("webgl")
 if (!gl) {
-	console.error("Unable to initialize WebGL.");
+	console.error("Unable to initialize WebGL.")
 }
 
 //Time step
-var dt = 0.015;
+var dt = 0.015
 //Time
-var time = 0.0;
+var time = 0.0
 
 var vertexSource = `
 attribute vec2 position;
 void main() {
 	gl_Position = vec4(position, 0.0, 1.0);
-}`;
+}`
 
 var fragmentSource = `
 precision highp float;
@@ -170,52 +170,52 @@ void main(){
 
 	//Output to screen
  	gl_FragColor = vec4(col,1.0);
-}`;
+}`
 
-window.addEventListener("resize", onWindowResize, false);
+window.addEventListener("resize", onWindowResize, false)
 function onWindowResize() {
-	canvas.width = window.innerWidth;
-	canvas.height = window.innerHeight;
-	gl.viewport(0, 0, canvas.width, canvas.height);
-	gl.uniform1f(widthHandle, window.innerWidth);
-	gl.uniform1f(heightHandle, window.innerHeight);
+	canvas.width = window.innerWidth
+	canvas.height = window.innerHeight
+	gl.viewport(0, 0, canvas.width, canvas.height)
+	gl.uniform1f(widthHandle, window.innerWidth)
+	gl.uniform1f(heightHandle, window.innerHeight)
 }
 
 function compileShader(shaderSource, shaderType) {
-	var shader = gl.createShader(shaderType);
-	gl.shaderSource(shader, shaderSource);
-	gl.compileShader(shader);
+	var shader = gl.createShader(shaderType)
+	gl.shaderSource(shader, shaderSource)
+	gl.compileShader(shader)
 	if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-		throw "Shader compile failed with: " + gl.getShaderInfoLog(shader);
+		throw "Shader compile failed with: " + gl.getShaderInfoLog(shader)
 	}
-	return shader;
+	return shader
 }
 
 function getAttribLocation(program, name) {
-	var attributeLocation = gl.getAttribLocation(program, name);
+	var attributeLocation = gl.getAttribLocation(program, name)
 	if (attributeLocation === -1) {
-		throw "Cannot find attribute " + name + ".";
+		throw "Cannot find attribute " + name + "."
 	}
-	return attributeLocation;
+	return attributeLocation
 }
 
 function getUniformLocation(program, name) {
-	var attributeLocation = gl.getUniformLocation(program, name);
+	var attributeLocation = gl.getUniformLocation(program, name)
 	if (attributeLocation === -1) {
-		throw "Cannot find uniform " + name + ".";
+		throw "Cannot find uniform " + name + "."
 	}
-	return attributeLocation;
+	return attributeLocation
 }
 
-var vertexShader = compileShader(vertexSource, gl.VERTEX_SHADER);
-var fragmentShader = compileShader(fragmentSource, gl.FRAGMENT_SHADER);
+var vertexShader = compileShader(vertexSource, gl.VERTEX_SHADER)
+var fragmentShader = compileShader(fragmentSource, gl.FRAGMENT_SHADER)
 
-var program = gl.createProgram();
-gl.attachShader(program, vertexShader);
-gl.attachShader(program, fragmentShader);
-gl.linkProgram(program);
+var program = gl.createProgram()
+gl.attachShader(program, vertexShader)
+gl.attachShader(program, fragmentShader)
+gl.linkProgram(program)
 
-gl.useProgram(program);
+gl.useProgram(program)
 
 var vertexData = new Float32Array([
 	-1.0,
@@ -226,15 +226,15 @@ var vertexData = new Float32Array([
 	1.0, // top right
 	1.0,
 	-1.0, // bottom right
-]);
+])
 
-var vertexDataBuffer = gl.createBuffer();
-gl.bindBuffer(gl.ARRAY_BUFFER, vertexDataBuffer);
-gl.bufferData(gl.ARRAY_BUFFER, vertexData, gl.STATIC_DRAW);
+var vertexDataBuffer = gl.createBuffer()
+gl.bindBuffer(gl.ARRAY_BUFFER, vertexDataBuffer)
+gl.bufferData(gl.ARRAY_BUFFER, vertexData, gl.STATIC_DRAW)
 
-var positionHandle = getAttribLocation(program, "position");
+var positionHandle = getAttribLocation(program, "position")
 
-gl.enableVertexAttribArray(positionHandle);
+gl.enableVertexAttribArray(positionHandle)
 gl.vertexAttribPointer(
 	positionHandle,
 	2, // position is a vec2 (2 values per component)
@@ -242,23 +242,22 @@ gl.vertexAttribPointer(
 	false, // don't normalize values
 	2 * 4, // two 4 byte float components per vertex (32 bit float is 4 bytes)
 	0 // how many bytes inside the buffer to start from
-);
+)
 
-var timeHandle = getUniformLocation(program, "time");
-var widthHandle = getUniformLocation(program, "width");
-var heightHandle = getUniformLocation(program, "height");
+var timeHandle = getUniformLocation(program, "time")
+var widthHandle = getUniformLocation(program, "width")
+var heightHandle = getUniformLocation(program, "height")
 
-gl.uniform1f(widthHandle, window.innerWidth);
-gl.uniform1f(heightHandle, window.innerHeight);
-let animationFrameId = null;
+gl.uniform1f(widthHandle, window.innerWidth)
+gl.uniform1f(heightHandle, window.innerHeight)
+let animationFrameId = null
 function draw() {
 	//Update time
-	time += dt;
+	time += dt
 
 	//Send uniforms to program
-	gl.uniform1f(timeHandle, time);
+	gl.uniform1f(timeHandle, time)
 	//Draw a triangle strip connecting vertices 0-4
-	gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-	;
-	animationFrameId = requestAnimationFrame(draw);
+	gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
+	animationFrameId = requestAnimationFrame(draw)
 }

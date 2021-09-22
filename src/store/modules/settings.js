@@ -1,28 +1,28 @@
-import defaultSettings from "@/settings";
+import defaultSettings from "@/settings"
 
-const { size } = defaultSettings;
+const { size } = defaultSettings
 
 const state = {
-  size,
-};
+	size,
+}
 
 const mutations = {
-  // CHANGE_SETTING: (state, { key, value }) => {
-  //   if (state.hasOwnProperty(key)) {
-  //     state[key] = value;
-  //   }
-  // },
-};
+	// CHANGE_SETTING: (state, { key, value }) => {
+	//   if (state.hasOwnProperty(key)) {
+	//     state[key] = value;
+	//   }
+	// },
+}
 
 const actions = {
-  // changeSetting({ commit }, data) {
-  //   commit("CHANGE_SETTING", data);
-  // },
-};
+	// changeSetting({ commit }, data) {
+	//   commit("CHANGE_SETTING", data);
+	// },
+}
 
 export default {
-  namespaced: true,
-  state,
-  mutations,
-  actions,
-};
+	namespaced: true,
+	state,
+	mutations,
+	actions,
+}

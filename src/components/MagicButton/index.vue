@@ -17,7 +17,7 @@ export default {}
 .magic-btn {
     width: 100%;
     text-align: center;
-    background: $primary-color;
+    background: $primaryColor;
     border-radius: 4px;
     height: 47px;
     line-height: 47px;

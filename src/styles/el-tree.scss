@@ -1,53 +1,35 @@
-@import './variables.scss';
+@import "./variables.scss";
 //竖式菜单
 .collapse-tree {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-bottom: none;
+	background: #fff;
+	border: 1px solid #ddd;
+	border-bottom: none;
 
-  .el-tree-node .el-tree-node__conten {
-    height: 42px;
-    line-height: 42px;
-    border-bottom: 1px solid #ddd;
+	.el-tree-node .el-tree-node__conten {
+		height: 42px;
+		line-height: 42px;
+		border-bottom: 1px solid #ddd;
 
-    &:last-child {
-      border-bottom: none;
-    }
-  }
+		&:last-child {
+			border-bottom: none;
+		}
+	}
 }
 
 .el-tree {
-  /* el-tree-node */
+	.el-tree-node {
+		span.el-tree-node__label {
+			color: #333 !important;
+		}
 
-  .el-tree-node {
-    span.el-tree-node__label {
-      color: #333 !important;
-    }
+		.el-tree-node__content:hover {
+			background-color: #ebebeb !important;
+		}
 
-    .el-tree-node__content:hover {
-      background-color: #ebebeb !important;
-    }
-
-    &.is-current.is-focusable {
-      & > .el-tree-node__content span.el-tree-node__label {
-        color: $primary-color !important;
-      }
-
-      // .el-tree-node__content {
-      //     background-color: #fff !important;
-      // }
-
-      // .el-tree-node__children .el-tree-node__content {
-      //     background-color: #fff !important;
-      // }
-
-      // .el-tree-node__children .el-tree-node__content:hover {
-      //     background-color: #ebebeb !important;
-      // }
-
-      // .el-tree-node__children .el-tree-node__content span.el-tree-node__label {
-      //     color: #333 !important;
-      // }
-    }
-  }
+		&.is-current.is-focusable {
+			& > .el-tree-node__content span.el-tree-node__label {
+				color: $primaryColor !important;
+			}
+		}
+	}
 }

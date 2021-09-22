@@ -1,10 +1,12 @@
 // sidebar
-$primary-color: #00c78c;//#228b22;//#ffd04b;
+$primaryColor: #f38508;//#00c78c;//#228b22;//#ffd04b;
 $sideBarWidth: 200px;
+$sidebarAndHeaderBg:#323234;
 
 // the :export directive is the magic sauce for webpack
 // https://www.bluematador.com/blog/how-to-share-variables-between-js-and-sass
 :export {
-  primaryColor: $primary-color;
+  primaryColor: $primaryColor;
   sideBarWidth: $sideBarWidth;
+  sidebarAndHeaderBg: $sidebarAndHeaderBg;
 }

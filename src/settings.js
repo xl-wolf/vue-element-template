@@ -1,5 +1,4 @@
 module.exports = {
-  title: "vue-element-template",
-  size: 'small',
+	title: "vue-element-template",
+	size: "small",
 }
-

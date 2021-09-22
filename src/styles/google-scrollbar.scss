@@ -1,79 +1,57 @@
-// $size-scroll-w: 7px;
-// $size-scroll-h: 7px;
-// ::-webkit-scrollbar {
-//   height: $size-scroll-h;
-//   width: $size-scroll-w;
-// }
-
-// ::-webkit-scrollbar-thumb {
-//   background-color: #C6CADA;
-// }
-
-// ::-webkit-scrollbar-thumb:hover {
-//   background: #F7C86F;
-// }
-// .el-scrollbar__thumb {
-//   background-color: #c6cada;
-//   border-radius: 0;
-//   height: $size-scroll-h;
-//   &:hover {
-//     background-color: #F7C86F;
-//   }
-// }
-
 $size-scroll-w: 7px;
 $size-scroll-h: 7px;
-::-webkit-scrollbar{
-  width:$size-scroll-w;
-  height:$size-scroll-h;
+::-webkit-scrollbar {
+	width: $size-scroll-w;
+	height: $size-scroll-h;
 }
-::-webkit-scrollbar-button{
-  background-color:transparent
+::-webkit-scrollbar-button {
+	background-color: transparent;
 }
-::-webkit-scrollbar-track{
-  background:transparent
+::-webkit-scrollbar-track {
+	background: transparent;
 }
-::-webkit-scrollbar-track-piece{
-  background:#efefef
+::-webkit-scrollbar-track-piece {
+	background: #efefef;
 }
-::-webkit-scrollbar-thumb{
-  background:#aaa;
-  border-radius:4px;
+::-webkit-scrollbar-thumb {
+	background: #aaa;
+	border-radius: 4px;
 }
-::-webkit-scrollbar-corner,::-webkit-scrollbar-resizer{
-  background:transparent
+::-webkit-scrollbar-corner,
+::-webkit-scrollbar-resizer {
+	background: transparent;
 }
 
 ::-webkit-scrollbar {
-  width: $size-scroll-w;
-  height: $size-scroll-h;
+	width: $size-scroll-w;
+	height: $size-scroll-h;
 }
 
 ::-webkit-scrollbar-button {
-  width: 0;
-  height: 0;
+	width: 0;
+	height: 0;
 }
 
 ::-webkit-scrollbar-corner {
-  display: none;
-  width: 0;
-  height: 0;
+	display: none;
+	width: 0;
+	height: 0;
 }
 
 ::-webkit-scrollbar-track {
-  background: initial;
+	background: initial;
 }
 
 ::-webkit-scrollbar-track-piece {
-  background: initial;
+	background: initial;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(170, 170, 170, 0.6);
-  border-radius: $size-scroll-w;
+	background: rgba(170, 170, 170, 0.6);
+	border-radius: $size-scroll-w;
 }
 
 ::-webkit-scrollbar-corner,
 ::-webkit-scrollbar-resizer {
-  background: initial;
+	background: initial;
 }

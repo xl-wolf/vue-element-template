@@ -1,10 +1,10 @@
 <template>
-  <nestedRouterViewConteiner />
+	<nestedRouterViewConteiner />
 </template>
 
 <script>
-import nestedRouterViewConteiner from '@/components/layout/components/appMain'
+import nestedRouterViewConteiner from "@/components/layout/components/appMain"
 export default {
-  components: { nestedRouterViewConteiner }
+	components: { nestedRouterViewConteiner },
 }
 </script>

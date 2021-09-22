@@ -1,7 +1,7 @@
 export default {
-  methods: {
-    onWindowResize(ref) {
-      ref.resize();
-    },
-  },
-};
+	methods: {
+		onWindowResize(ref) {
+			ref.resize()
+		},
+	},
+}

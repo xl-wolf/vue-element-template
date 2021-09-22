@@ -1,115 +1,115 @@
 $distance-map: (
-  pd: padding,
-  pt: padding-top,
-  pb: padding-bottom,
-  pr: padding-right,
-  pl: padding-left,
-  mg: margin,
-  mt: margin-top,
-  mb: margin-bottom,
-  mr: margin-right,
-  ml: margin-left,
+	pd: padding,
+	pt: padding-top,
+	pb: padding-bottom,
+	pr: padding-right,
+	pl: padding-left,
+	mg: margin,
+	mt: margin-top,
+	mb: margin-bottom,
+	mr: margin-right,
+	ml: margin-left,
 );
 
 @each $key, $propety in $distance-map {
-  @for $i from 1 through 25 {
-    $v: $i * 4;
-    .#{$key}#{$v} {
-      #{$propety}: $v + px;
-    }
-  }
+	@for $i from 1 through 25 {
+		$v: $i * 4;
+		.#{$key}#{$v} {
+			#{$propety}: $v + px;
+		}
+	}
 }
 
 @for $i from 1 through 25 {
-  $v: $i * 4;
-  .mlr#{$v} {
-    margin-left: $v + px;
-    margin-right: $v + px;
-  }
-  .mtb#{$v} {
-    margin-top: $v + px;
-    margin-bottom: $v + px;
-  }
-  .plr#{$v} {
-    padding-left: $v + px;
-    padding-right: $v + px;
-  }
-  .ptb#{$v} {
-    padding-top: $v + px;
-    padding-bottom: $v + px;
-  }
+	$v: $i * 4;
+	.mlr#{$v} {
+		margin-left: $v + px;
+		margin-right: $v + px;
+	}
+	.mtb#{$v} {
+		margin-top: $v + px;
+		margin-bottom: $v + px;
+	}
+	.plr#{$v} {
+		padding-left: $v + px;
+		padding-right: $v + px;
+	}
+	.ptb#{$v} {
+		padding-top: $v + px;
+		padding-bottom: $v + px;
+	}
 }
 
 @for $i from 1 through 10 {
-  $v: ($i * 2) + 10;
-  .fs#{$v} {
-    font-size: $v + px;
-  }
+	$v: ($i * 2) + 10;
+	.fs#{$v} {
+		font-size: $v + px;
+	}
 }
 @for $i from 1 through 10 {
-  $v: ($i * 2) + 10;
-  .fs#{$v}-important {
-    font-size: $v + px !important;
-  }
-}
-
-@for $i from 1 through 10 {
-  $width: $i * 10;
-  $width1: $i * 10 + 100;
-  $width2: $i * 10 + 200;
-  $width3: $i * 10 + 300;
-  $width4: $i * 10 + 400;
-  $width5: $i * 10 + 500;
-
-  .w#{$width} {
-    width: $width + px !important;
-  }
-  .w#{$width1} {
-    width: $width1 + px !important;
-  }
-  .w#{$width2} {
-    width: $width2 + px !important;
-  }
-  .w#{$width3} {
-    width: $width3 + px !important;
-  }
-  .w#{$width4} {
-    width: $width4 + px !important;
-  }
-  .w#{$width5} {
-    width: $width5 + px !important;
-  }
+	$v: ($i * 2) + 10;
+	.fs#{$v}-important {
+		font-size: $v + px !important;
+	}
 }
 
 @for $i from 1 through 10 {
-  $percent1: $i * 5;
-  $percent2: $i * 5 + 50;
-  .h#{$percent1}p {
-    height: $percent1 + 0% !important;
-  }
-  .h#{$percent2}p {
-    height: $percent2 + 0% !important;
-  }
+	$width: $i * 10;
+	$width1: $i * 10 + 100;
+	$width2: $i * 10 + 200;
+	$width3: $i * 10 + 300;
+	$width4: $i * 10 + 400;
+	$width5: $i * 10 + 500;
+
+	.w#{$width} {
+		width: $width + px !important;
+	}
+	.w#{$width1} {
+		width: $width1 + px !important;
+	}
+	.w#{$width2} {
+		width: $width2 + px !important;
+	}
+	.w#{$width3} {
+		width: $width3 + px !important;
+	}
+	.w#{$width4} {
+		width: $width4 + px !important;
+	}
+	.w#{$width5} {
+		width: $width5 + px !important;
+	}
+}
+
+@for $i from 1 through 10 {
+	$percent1: $i * 5;
+	$percent2: $i * 5 + 50;
+	.h#{$percent1}p {
+		height: $percent1 + 0% !important;
+	}
+	.h#{$percent2}p {
+		height: $percent2 + 0% !important;
+	}
 }
 @for $i from 1 through 10 {
-  $percent1: $i * 5;
-  $percent2: $i * 5 + 50;
-  .w#{$percent1}p {
-    width: $percent1 + 0% !important;
-  }
-  .w#{$percent2}p {
-    width: $percent2 + 0% !important;
-  }
+	$percent1: $i * 5;
+	$percent2: $i * 5 + 50;
+	.w#{$percent1}p {
+		width: $percent1 + 0% !important;
+	}
+	.w#{$percent2}p {
+		width: $percent2 + 0% !important;
+	}
 }
 .mg-auto {
-  margin-left: auto;
-  margin-right: auto;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 @for $i from 1 through 30 {
-  $percent1: $i * 10;
-  $percent2: $i * 10px;
-  .w100p-d#{$percent1} {
-    width: calc(100% - #{$percent2}) !important;
-  }
+	$percent1: $i * 10;
+	$percent2: $i * 10px;
+	.w100p-d#{$percent1} {
+		width: calc(100% - #{$percent2}) !important;
+	}
 }
