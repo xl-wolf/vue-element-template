@@ -28,9 +28,9 @@ import { validUsername } from "@/utils/validate"
 export default {
 	name: "Login",
 	components: {
-		MagicBgChanger: () => import("@/components/MagicBgChanger/index"),
+		MagicBgChanger: () => import("@/components/MagicBgChanger/TextTwo.vue"),
 		MagicTitle: () => import("@/components/MagicTitle/index"),
-		MagicButton: () => import("@/components/MagicButton/index"),
+		MagicButton: () => import("@/components/MagicButton/ButtonTwo.vue"),
 	},
 	data() {
 		const validateUsername = (rule, value, callback) => {
@@ -196,7 +196,6 @@ $cursor: #fff;
 		max-width: 100%;
 		padding: 160px 35px 0;
 		margin: 0 auto;
-		overflow: hidden;
 	}
 
 	.icon-container {
