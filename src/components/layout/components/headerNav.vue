@@ -2,7 +2,7 @@
 	<div id="headerNav">
 		<i class="collapse-ctrl" :class="`el-icon-s-${!menuStatus ? 'fold' : 'unfold'}`" @click="toggleMenuCollapse" />
 		<div class="other-ctrl">
-			<img class="img setting" src="@/assets/images/setting.png" @click="showSettingDrawer" />
+			<!-- <img class="img setting" src="@/assets/images/setting.png" @click="showSettingDrawer" /> -->
 			<screenFull class="mr16" style="display:inline-block" />
 			<img class="img" :src="avatar" />
 			<el-dropdown trigger="hover" class="trangle-position">
