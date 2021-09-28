@@ -27,12 +27,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles/variables.scss';
 .admin-title-svg-text {
     width: 100%;
     font-size: 36px;
     text {
         text-anchor: middle;
-        stroke: rgb(120, 243, 243);
+        stroke: $primaryColor;
         stroke-width: 1;
         animation: textAnimate 5s infinite;
     }
@@ -40,7 +41,7 @@ export default {
         0% {
             stroke-dasharray: 0 50%;
             stroke-dashoffset: 20%;
-            fill: hsl(189, 68%, 75%);
+            fill: $primaryColor;
         }
         100% {
             stroke-dasharray: 50% 0;
