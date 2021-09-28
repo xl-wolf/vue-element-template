@@ -10,7 +10,7 @@
     "socket": "cd ./server && npm i && node socket"
   },
   "dependencies": {
-    "axios": "0.18.1",
+    "axios": "0.21.2",
     "core-js": "^3.6.5",
     "echarts": "^4.8.0",
     "echarts-gl": "^1.1.1",
