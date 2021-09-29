@@ -164,18 +164,14 @@ export default {
 </script>
 <style lang="scss">
 .tree-container {
-	flex: 0 0 200px;
-	height: inherit;
-	overflow: auto;
+	padding: 20px;
 
 	.tree-area {
 		height: calc(100% - 60px);
 		overflow: auto;
-		border-right: 1px solid #efefef;
 	}
 }
 #echarts-3d-map-container {
-	margin-left: 10px;
 	background: #2b2f3a;
 	width: 100%;
 	height: 100%;

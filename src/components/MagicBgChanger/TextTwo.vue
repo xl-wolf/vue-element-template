@@ -60,8 +60,8 @@ export default {
 			20% {
 				transform: scale(1);
 				color: cyan;
-				-webkit-text-stroke: 3px red;
-				filter: drop-shadow(0 0 1px black) drop-shadow(0 0 1px black) drop-shadow(0 0 3px red) drop-shadow(0 0 5px red) hue-rotate(10turn);
+				-webkit-text-stroke: 3px lightseagreen;
+				filter: drop-shadow(0 0 1px lightpink) drop-shadow(0 0 1px lightpink) drop-shadow(0 0 3px lightseagreen) drop-shadow(0 0 5px lightseagreen) hue-rotate(10turn);
 			}
 
 			50% {

@@ -68,15 +68,15 @@ export default {
 				strokeColor: "#0ff",
 				strokeOpacity: 1,
 				strokeWeight: 2,
-				fillColor: "#f2f",
-				fillOpacity: 0.7,
+				fillColor: "#0ff",
+				fillOpacity: 0.2,
 				strokeStyle: "dashed",
 			}
 			vm.drawCircle(circleOpt)
 
 			mk.on("click", function(self) {
 				const position = self.lnglat
-				// console.log(this, position, self)
+				console.log(this, position, self)
 				const contentInfo = `拖动当前点获取商机点信息`
 				const content = `<div>${contentInfo}</div>`
 				const infoWindowOpts = {
@@ -105,12 +105,12 @@ export default {
 				const circleOpt = {
 					map: vm.Amap,
 					center: vm.currentPosition,
-					radius: 7000,
+					radius: 5000,
 					strokeColor: "#0ff",
 					strokeOpacity: 1,
 					strokeWeight: 2,
-					fillColor: "#f2f",
-					fillOpacity: 0.7,
+					fillColor: "#0ff",
+					fillOpacity: 0.2,
 					strokeStyle: "dashed",
 				}
 				vm.drawCircle(circleOpt)
@@ -143,7 +143,7 @@ export default {
 			const vm = this
 			const reqParams = { currentPosition: vm.currentPosition }
 			const amapRes = await amapPointsApi(reqParams)
-			console.log("amapPointsApi", amapRes)
+			// console.log("amapPointsApi", amapRes)
 			const points = amapRes.data
 			for (let i = 0; i < points.length; i++) {
 				const icon = new AMap.Icon({
@@ -152,15 +152,14 @@ export default {
 					imageSize: new AMap.Size(20, 20),
 					imageOffset: new AMap.Pixel(0, 0),
 				})
-				console.log(points[i])
+				// console.log(points[i])
 				const position = points[i]
 				const marker = vm.addAMapMarker(icon, position)
 				marker.dataId = i
+				marker.position = position
 				vm.curMarkersArray.push(marker)
 				marker.on("click", function() {
-					// console.log(this)
-					const { position } = this.B || this.De
-					// console.log(this, position)
+					const { position } = this
 					this.contentInfo = `建行厦门科技支行${this.dataId}`
 					const content = `<div style='cursor:pointer;' id=${this.dataId}>${this.contentInfo}</div>`
 					const infoWindowOpts = {
@@ -175,7 +174,7 @@ export default {
 							document.getElementById(this.dataId).addEventListener("click", () => {
 								console.log("this.dataId", this.dataId, this)
 							})
-						}, 500)
+						}, 200)
 					})
 					infoWinRef.open(vm.Amap, position)
 				})
@@ -255,8 +254,7 @@ export default {
 		},
 		// 添加信息窗口
 		addAMapInfoWindow(infoWindowOpts) {
-			const infoWindow = new AMap.InfoWindow(infoWindowOpts)
-			return infoWindow
+			return new AMap.InfoWindow(infoWindowOpts)
 		},
 		// 移除信息窗口
 		removeAMapInfoWindow() {

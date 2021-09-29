@@ -1,5 +1,5 @@
 <template>
-	<div class="app-main-container">
+	<div class="app-main-container ptb20 plr20">
 		<el-card shadow="hover">
 			<vue-typing :text="typingText" :cursorOptions="myCursor" />
 		</el-card>
