@@ -1,4 +1,3 @@
-var _global
 /*
  * @var star_r：star半径系数，系数越大，半径越大
  * @var star_alpha：生成star的透明度，star_alpha越大，透明度越低

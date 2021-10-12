@@ -10,7 +10,7 @@ router.get("/amap/points", (req, res) => {
 	// console.log(req.query);
 	const { currentPosition } = req.query
 	// 随机生成前端传过来的点附近的10个点
-	let points = []
+	const points = []
 	for (let i = 0; i < 10; i++) {
 		points.push([(Number(currentPosition[0]) + (Math.random() - 0.5) * 0.08).toFixed(6), (Number(currentPosition[1]) + (Math.random() - 0.5) * 0.08).toFixed(6)])
 	}
@@ -21,7 +21,7 @@ router.get("/bmap/points", (req, res) => {
 	// console.log(req.query);
 	const { currentPosition } = req.query
 	// 随机生成前端传过来的点附近的10个点
-	let points = []
+	const points = []
 	for (let i = 0; i < 10; i++) {
 		points.push([(Number(currentPosition[0]) + (Math.random() - 0.5) * 0.08).toFixed(6), (Number(currentPosition[1]) + (Math.random() - 0.5) * 0.08).toFixed(6)])
 	}

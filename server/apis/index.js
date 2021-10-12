@@ -12,11 +12,11 @@ readDirSync(root)
  * 递归读取scr文件夹以及src子文件夹下的.js文件
  */
 function readDirSync(filePath) {
-	let pathList = fs.readdirSync(filePath)
+	const pathList = fs.readdirSync(filePath)
 	pathList.forEach((fileType, index) => {
-		let info = fs.statSync(filePath + "/" + fileType)
+		const info = fs.statSync(filePath + "/" + fileType)
 		if (info.isDirectory()) {
-			let NewFilePath = filePath + "/" + fileType
+			const NewFilePath = filePath + "/" + fileType
 			readDirSync(NewFilePath)
 		} else {
 			if (path.extname(fileType) === ".js") {

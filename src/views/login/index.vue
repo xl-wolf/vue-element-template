@@ -60,6 +60,7 @@ export default {
 			passwordType: "password",
 			clearRef: null,
 			curBgIndex: 0,
+			canvasCount: 5
 		}
 	},
 	mounted() {
@@ -73,7 +74,7 @@ export default {
 	methods: {
 		changeBG() {
 			this.removeLastChild()
-			this.curBgIndex = this.curBgIndex === 4 ? 1 : ++this.curBgIndex
+			this.curBgIndex = this.curBgIndex === this.canvasCount ? 1 : ++this.curBgIndex
 			this.clearRef()
 			this.loadModulesRandom(this.curBgIndex)
 		},
@@ -83,7 +84,7 @@ export default {
 			DOM.removeChild(children[children.length - 1])
 		},
 		loadModulesRandom(idx) {
-			const random = idx || Math.ceil(Math.random() * 4)
+			const random = idx || Math.ceil(Math.random() * this.canvasCount)
 			switch (random) {
 				case 1:
 					import("./plugins/canvas01").then(({ drawCanvas, clearFunc }) => {
@@ -105,6 +106,12 @@ export default {
 					break
 				case 4:
 					import("./plugins/canvas10").then(({ drawCanvas, clearFunc }) => {
+						this.clearRef = clearFunc
+						drawCanvas("form-bg")
+					})
+					break
+				case 5:
+					import("./plugins/canvas11").then(({ drawCanvas, clearFunc }) => {
 						this.clearRef = clearFunc
 						drawCanvas("form-bg")
 					})
