@@ -99,7 +99,7 @@ export default {
 					})
 					break
 				case 3:
-					import("./plugins/canvas09").then(({ drawCanvas, clearFunc }) => {
+					import("./plugins/webgl02").then(({ drawCanvas, clearFunc }) => {
 						this.clearRef = clearFunc
 						drawCanvas("form-bg")
 					})

@@ -11,7 +11,7 @@ export default {
 				title: "树",
 				icon: "xl-icon-Treewithered",
 			},
-			hidden: false,
+			hidden: true,
 			level: 1,
 			sort: 7,
 		},

@@ -143,12 +143,9 @@ export default {
 			const { lat, lng } = marker.point
 			const { dataId } = marker
 			const point = new BMap.Point(lng, lat)
-			let sContent
-			if (isCurrent) {
-				sContent = `<div id=${dataId} style='cursor:pointer'><div>拖动当前点获取信息</div></div>`
-			} else {
-				sContent = `<div id=${dataId} style='cursor:pointer;'><div style='display:inline-block;margin:0 0 5px 0;padding:0.2em 0'>客户名称：</div><div>建设银行厦门科技支行${dataId}</div></div>`
-			}
+			const sContent = isCurrent
+				? `<div id=${dataId} style='cursor:pointer'><div>拖动当前点获取信息</div></div>`
+				: `<div id=${dataId} style='cursor:pointer;'><div style='display:inline-block;margin:0 0 5px 0;padding:0.2em 0'>客户名称：</div><div>建设银行厦门科技支行${dataId}</div></div>`
 
 			const infoWindow = new BMap.InfoWindow(sContent, opts) // 创建信息窗口对象
 			// 判断窗口的打开状态
@@ -165,7 +162,7 @@ export default {
 		// 生成点聚合
 		addBMapMarkerClusterer(bmap) {
 			const vm = this
-			let markers = []
+			const markers = []
 			let pt = null
 			let i = 0
 			for (; i < 200; i++) {

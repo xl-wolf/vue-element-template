@@ -1,9 +1,7 @@
 import axios from "axios"
-import { primaryColor } from '@/styles/variables.scss'
-import {
-	Message,
-} from "element-ui"
-import { mountLoading, destroyLoading,showLoading,hideLoading } from "@/assets/js/MagicLoading.js"
+import { primaryColor } from "@/styles/variables.scss"
+import { Message } from "element-ui"
+import { mountLoading, destroyLoading, showLoading, hideLoading } from "@/assets/js/MagicLoading.js"
 const baseURL = process.env === "development" ? "http://localhost:6067" : "http://localhost:6067"
 // const baseURL =
 //   process.env === "development"
@@ -20,7 +18,7 @@ const loadingContainer = document.body
 service.interceptors.request.use(
 	(config) => {
 		// mountLoading(loadingContainer,[primaryColor,primaryColor,primaryColor,primaryColor])
-		showLoading(loadingContainer,[primaryColor,primaryColor,primaryColor,primaryColor])
+		showLoading(loadingContainer, [primaryColor, primaryColor, primaryColor, primaryColor])
 		return config
 	},
 	(error) => {
@@ -45,8 +43,8 @@ service.interceptors.response.use(
 			type: "error",
 			duration: 5 * 1000,
 		})
-    // destroyLoading(loadingContainer)
-    hideLoading(loadingContainer)
+		// destroyLoading(loadingContainer)
+		hideLoading(loadingContainer)
 		return Promise.reject(error)
 	}
 )
