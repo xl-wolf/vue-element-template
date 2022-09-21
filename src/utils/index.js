@@ -46,11 +46,9 @@ export const getPageTitle = (pageTitle) => {
 // export 使用 default
 export const requireContentArray = (r, exinclude) => {
 	let contents = []
-	const paths = r.keys().filter((p) => {
-		return exinclude.indexOf(p) == -1
-	})
-	for (let p of paths) {
-		let fn = r(p).default ? r(p).default : r(p)
+	const paths = r.keys().filter((p) => (exinclude.indexOf(p) == -1))
+	for (const p of paths) {
+		const fn = r(p).default ? r(p).default : r(p)
 		if (fn instanceof Array) {
 			contents = [...contents, ...fn]
 		} else if (fn instanceof Object) {
