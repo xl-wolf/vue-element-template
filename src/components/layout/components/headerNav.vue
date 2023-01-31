@@ -8,9 +8,9 @@
 			<el-dropdown trigger="hover" class="trangle-position">
 				<i class="el-icon-caret-bottom" />
 				<el-dropdown-menu slot="dropdown">
-					<el-dropdown-item>
+					<!-- <el-dropdown-item>
 						<a target="_blank" href="https://github.com/xl-wolf/vue-element-template">项目地址</a>
-					</el-dropdown-item>
+					</el-dropdown-item> -->
 					<el-dropdown-item>
 						<div @click="logout">退出登录</div>
 					</el-dropdown-item>

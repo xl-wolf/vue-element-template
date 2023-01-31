@@ -24,7 +24,7 @@ export default {
 						icon: "xl-icon-3d",
 						role: ["admin", "guest"],
 					},
-					hidden: false,
+					hidden: true,
 					level: 2,
 				},
 				{
@@ -36,6 +36,7 @@ export default {
 						icon: "xl-icon-d",
 						role: ["admin", "guest"],
 					},
+					hidden: true,
 					level: 2,
 				},
 				{
@@ -58,6 +59,7 @@ export default {
 						icon: "xl-icon-VR",
 						role: ["admin", "guest"],
 					},
+					hidden: true,
 					level: 2,
 				},
 			],

@@ -11,7 +11,7 @@ export default {
 				icon: "xl-icon-echarts_mappie",
 				role: ["admin", "guest"],
 			},
-			hidden: false,
+			hidden: true,
 			level: 1,
 			sort: 5,
 			children: [

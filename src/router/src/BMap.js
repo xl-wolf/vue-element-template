@@ -11,7 +11,7 @@ export default {
 				title: "百度地图",
 				icon: "xl-icon-751bianjiqi_baiduditu",
 			},
-			hidden: false,
+			hidden: true,
 			level: 1,
 			sort: 3,
 		},
